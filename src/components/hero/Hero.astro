@@ -1,0 +1,93 @@
+---
+import ImgSlot from '../ImgSlot.astro';
+
+const phrases = ['Diseño con intención', 'Código que se sostiene', 'La estética no es decoración'];
+const repeats = 6;
+
+const sequence = Array.from({ length: repeats }, () => phrases).flat();
+---
+
+<section id="top" style="position: relative; padding: clamp(24px, 5vw, 64px) clamp(16px, 4vw, 56px) 0;">
+  <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 clamp(8px, 1.6vw, 22px); align-items: start;">
+    <div style="grid-column: 1 / 3; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;">Vol. 01<br><span class="text-muted">Diseño & Código&nbsp;/ sept. 2026</span></div>
+    <div style="grid-column: 9 / 13; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; text-align: right;">Estudio independiente<br><span class="text-muted">Buenos Aires, Argentina</span></div>
+    <div style="grid-column: 1 / 13; height: 2px; background: var(--color-divider); margin: clamp(10px, 1.6vw, 20px) 0 clamp(12px, 2vw, 26px);"></div>
+  </div>
+
+  <div style="position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 clamp(8px, 1.6vw, 22px);">
+    <h1 style="grid-column: 1 / 12; grid-row: 1; margin: 0; font-size: clamp(52px, 13.2vw, 208px); line-height: 0.84; letter-spacing: -0.045em; text-transform: uppercase; position: relative; z-index: 3; mix-blend-mode: multiply;">
+      <span style="white-space: nowrap;">nada es</span><br>
+      <span style="display: inline-block;">decorativo</span><br>
+      todo es<br>
+      delib<span style="color: var(--ac);">erado.</span>
+    </h1>
+    <div style="grid-column: 8 / 13; grid-row: 1; align-self: center; margin-top: clamp(40px, 9vw, 120px); position: relative; z-index: 1;">
+      <div style="position: relative; width: 100%; aspect-ratio: 3 / 4;">
+        <ImgSlot>Conceptual: grilla tipográfica, sombra dura, masa abstracta</ImgSlot>
+      </div>
+      <div style="font-size: 11px; letter-spacing: 0.06em; margin-top: 8px; display: flex; justify-content: space-between; gap: 12px;"><span class="text-muted">Fig. 01 — Estructura antes que estilo</span><span style="color: var(--ac);">↘</span></div>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(16px, 3vw, 32px) clamp(8px, 1.6vw, 22px); padding: clamp(20px, 4vw, 52px) 0 clamp(28px, 5vw, 72px); align-items: end;">
+    <p style="grid-column: 1 / 6; margin: 0; font-size: clamp(16px, 1.5vw, 22px); line-height: 1.35; max-width: 34ch;">Diseñamos y desarrollamos productos digitales para marcas que quieren verse — y funcionar — a la altura de lo que hacen.</p>
+    <div style="grid-column: 6 / 9; font-size: 11px; line-height: 1.5; letter-spacing: 0.04em;" class="text-muted">Un estudio de diseño y desarrollo<br>para marcas que no se conforman.</div>
+    <div style="grid-column: 9 / 13; display: flex; justify-content: flex-end;">
+      <a href="#contacto" class="btn btn-primary" style="font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; padding: 14px 22px;">Iniciar una conversación →</a>
+    </div>
+  </div>
+
+  <div class="ticker">
+    <div class="ticker-track">
+      {[0, 1].map((copy) => (
+        <div class="ticker-copy" aria-hidden={copy === 1}>
+          {sequence.map((phrase) => (
+            <>
+              <span class="ticker-item">{phrase}</span>
+              <span class="ticker-item ticker-mark">◆</span>
+            </>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .ticker {
+    overflow: hidden;
+    border-top: 2px solid var(--color-divider);
+    border-bottom: 2px solid var(--color-divider);
+    padding: 7px 0;
+  }
+
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    animation: cp-ticker 38s linear infinite;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .ticker-copy {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  .ticker-item {
+    padding-right: 40px;
+    white-space: nowrap;
+  }
+
+  .ticker-mark {
+    color: var(--ac);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-track {
+      animation: none;
+    }
+  }
+</style>

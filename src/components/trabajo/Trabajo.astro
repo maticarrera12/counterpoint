@@ -1,0 +1,46 @@
+---
+import ImgSlot from '../ImgSlot.astro';
+---
+
+<section id="trabajo" style="padding: clamp(40px, 7vw, 96px) clamp(16px, 4vw, 56px) clamp(48px, 8vw, 110px);">
+  <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 16px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;">
+    <span>06 / Trabajo seleccionado</span><span class="text-muted">Tres proyectos, resumidos</span>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(16px, 3vw, 30px) clamp(8px, 1.6vw, 22px); margin-top: clamp(24px, 4vw, 56px); align-items: end;">
+    <div style="grid-column: 1 / 8; position: relative; aspect-ratio: 16 / 10;">
+      <ImgSlot src="/img/trabajo-01-capas.svg" alt="Capas tipográficas superpuestas con sombra larga">Conceptual: capas tipográficas, sombra larga</ImgSlot>
+    </div>
+    <div style="grid-column: 7 / 13; position: relative; z-index: 2; background: var(--color-bg); padding: clamp(12px, 2vw, 22px) 0 0 clamp(12px, 2vw, 24px); border-left: 2px solid var(--ac);">
+      <div style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--ac);">Caso 01 — Cadena gastronómica</div>
+      <h3 style="margin: 10px 0 12px; font-size: clamp(24px, 3.4vw, 48px); line-height: 0.98; letter-spacing: -0.03em;">Repensar la presencia digital de una cadena gastronómica.</h3>
+      <p style="margin: 0; font-size: clamp(13px, 1.2vw, 16px); line-height: 1.5; max-width: 46ch;" class="text-muted">Doce locales, un solo sitio que no vendía nada. Lo dimos de baja y lo reconstruimos alrededor de cómo la gente realmente pide delivery.</p>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(16px, 3vw, 30px) clamp(8px, 1.6vw, 22px); margin-top: clamp(40px, 7vw, 96px); align-items: start;">
+    <div style="grid-column: 1 / 5;">
+      <div style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;" class="text-muted">Caso 02 — Plataforma B2B</div>
+      <h3 style="margin: 10px 0 12px; font-size: clamp(24px, 3.4vw, 48px); line-height: 0.98; letter-spacing: -0.03em;">Convertir la complejidad en claridad operativa.</h3>
+      <p style="margin: 0; font-size: clamp(13px, 1.2vw, 16px); line-height: 1.5;" class="text-muted">Doscientas pantallas heredadas. Doce que el usuario realmente usaba.</p>
+    </div>
+    <div style="grid-column: 6 / 13; position: relative; aspect-ratio: 21 / 9;">
+      <ImgSlot src="/img/trabajo-02-densa.svg" alt="Grilla modular densa y repetitiva">Conceptual: estructura densa y repetitiva</ImgSlot>
+    </div>
+    <div style="grid-column: 6 / 13; font-size: 11px;" class="text-muted">Fig. 06.2 — La reducción como acto estratégico</div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(16px, 3vw, 30px) clamp(8px, 1.6vw, 22px); margin-top: clamp(40px, 7vw, 96px); align-items: end;">
+    <div style="grid-column: 1 / 13; grid-row: 1; position: relative; aspect-ratio: 24 / 9;">
+      <ImgSlot src="/img/lasalle.png" alt="Lasalle"></ImgSlot>
+    </div>
+    <div style="grid-column: 2 / 9; grid-row: 2; margin-top: clamp(16px, 3vw, 40px);">
+      <h3 style="margin: 0; font-size: clamp(24px, 4.2vw, 62px); line-height: 0.94; letter-spacing: -0.035em; color: var(--color-text); ;">Llevar un negocio familiar de 20 años a su primera presencia digital real.</h3>
+    </div>
+    <div style="grid-column: 9 / 13; grid-row: 2; text-align: right; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; margin-top: clamp(16px, 3vw, 40px);">Caso 03 — Estudio juridico con 20 años<br><span class="text-muted" style="text-transform: none; letter-spacing: 0;">Seis meses de trabajo silencioso, un lanzamiento visible.</span></div>
+    <div>
+
+    </div>
+   
+  </div>
+</section>
