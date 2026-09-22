@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 900" preserveAspectRatio="xMidYMid slice">
-  <rect width="2400" height="900" fill="#f3f2f2"/>
-  <line x1="0" y1="820" x2="2400" y2="820" stroke="#201e1d" stroke-opacity="0.15" stroke-width="2"/>
-  <rect x="180" y="380" width="10" height="90" fill="#201e1d">
-    <animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.45;0.5;0.95;1" dur="1.2s" repeatCount="indefinite"/>
-  </rect>
-</svg>
