@@ -1,0 +1,180 @@
+---
+const items = [
+  {
+    num: '01',
+    title: 'Landing pages',
+    hook: 'Una página, un objetivo: que el visitante haga algo.',
+    includes: 'diseño a medida, copy estructurado, formulario o WhatsApp integrado, SEO básico y analítica.',
+    plazo: '1 a 2 semanas.',
+    accent: false,
+    variant: 1,
+  },
+  {
+    num: '02',
+    title: 'Sitios institucionales',
+    hook: 'La presencia digital completa de una marca, pensada para durar.',
+    includes: 'arquitectura de contenido, diseño de todas las secciones, sitio autoadministrable si hace falta, SEO y performance.',
+    plazo: '3 a 6 semanas.',
+    accent: true,
+    variant: 2,
+  },
+  {
+    num: '03',
+    title: 'Aplicaciones web a medida',
+    hook: 'Cuando una planilla ya no alcanza.',
+    includes: 'CRMs, paneles de gestión, herramientas internas y plataformas con usuarios. Del relevamiento al deploy.',
+    plazo: 'según alcance.',
+    accent: false,
+    variant: 3,
+  },
+];
+---
+
+<section id="servicios" class="border-t-2 border-divider pt-[clamp(32px,5vw,60px)] px-[clamp(16px,4vw,56px)] pb-[clamp(48px,8vw,110px)]">
+  <div class="text-[11px] tracking-[0.14em] uppercase font-semibold mb-[10px]">03 / Servicios</div>
+  <h2 class="m-0 text-[clamp(30px,5vw,78px)] leading-[0.94] tracking-[-0.04em] max-w-[16ch]">Lo que hacemos, sin vueltas.</h2>
+  <p class="text-muted mt-3 mb-[clamp(24px,5vw,60px)] text-[clamp(15px,1.4vw,19px)] leading-[1.5] max-w-[52ch]">Tres formatos de trabajo. Todos con diseño y código propios, de punta a punta.</p>
+
+  <div class="ch-grid">
+    {items.map((item) => (
+      <div class="ch-item" data-variant={item.variant}>
+        <div class="ch-item__face ch-item__face--base">
+          <div class:list={['ch-item__num', item.accent && 'text-accent']}>{item.num}</div>
+          <h3 class="ch-item__title">{item.title}</h3>
+          <p class="ch-item__text">
+            {item.hook}<br />
+            <strong>Incluye:</strong> {item.includes}<br />
+            <strong>Plazo:</strong> {item.plazo}
+          </p>
+        </div>
+        <div class="ch-item__reveal" aria-hidden="true">
+          <div class="ch-item__face ch-item__face--inverted">
+            <div class:list={['ch-item__num', item.accent && 'text-accent']}>{item.num}</div>
+            <h3 class="ch-item__title">{item.title}</h3>
+            <p class="ch-item__text">
+              {item.hook}<br />
+              <strong>Incluye:</strong> {item.includes}<br />
+              <strong>Plazo:</strong> {item.plazo}
+            </p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div class="flex flex-wrap items-baseline justify-between gap-4 mt-[clamp(28px,5vw,56px)]">
+    <p class="m-0 text-[clamp(17px,1.8vw,24px)] leading-[1.4] max-w-[36ch]">¿No sabés cuál necesitás? Contanos el problema. El formato viene después.</p>
+    <a href="#contacto" class="text-accent text-[11px] tracking-[0.14em] uppercase font-semibold whitespace-nowrap">Hablemos →</a>
+  </div>
+</section>
+
+<style>
+  .ch-grid {
+    --item-h: clamp(165px, 16vw, 240px);
+    display: grid;
+    grid-template-columns: 1fr;
+    border-top: 1px solid var(--color-divider);
+  }
+
+  .ch-item {
+    position: relative;
+    height: var(--item-h);
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-divider);
+  }
+
+  .ch-item:last-child {
+    border-bottom: 2px solid var(--color-divider);
+  }
+
+  .ch-item__face {
+    box-sizing: border-box;
+    height: var(--item-h);
+    padding: clamp(14px, 2.4vw, 26px) 0;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0 clamp(8px, 1.6vw, 22px);
+  }
+
+  .ch-item__face--base {
+    background: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  .ch-item__face--inverted {
+    background: var(--color-text);
+    color: var(--color-bg);
+  }
+
+  .ch-item__num {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: clamp(56px, 9vw, 130px);
+    line-height: 0.8;
+    letter-spacing: -0.05em;
+  }
+
+  .ch-item__title {
+    margin: 0;
+    font-size: clamp(18px, 2vw, 30px);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  .ch-item__text {
+    margin: 0;
+    font-size: clamp(14px, 1.2vw, 17px);
+    line-height: 1.45;
+  }
+
+  /* Variant 01 — número y texto abajo, título arriba */
+  .ch-item[data-variant="1"] .ch-item__face { align-items: start; }
+  .ch-item[data-variant="1"] .ch-item__num { grid-column: 1 / 5; align-self: end; }
+  .ch-item[data-variant="1"] .ch-item__title { grid-column: 5 / 9; align-self: start; }
+  .ch-item[data-variant="1"] .ch-item__text { grid-column: 9 / 13; align-self: end; }
+
+  /* Variant 02 — texto y título arriba, número abajo */
+  .ch-item[data-variant="2"] .ch-item__face { align-items: start; }
+  .ch-item[data-variant="2"] .ch-item__text { grid-column: 1 / 5; grid-row: 1; align-self: start; }
+  .ch-item[data-variant="2"] .ch-item__num { grid-column: 5 / 8; grid-row: 1; align-self: end; }
+  .ch-item[data-variant="2"] .ch-item__title { grid-column: 8 / 13; grid-row: 1; align-self: start; }
+
+  /* Variant 03 — número arriba, título y texto abajo */
+  .ch-item[data-variant="3"] .ch-item__face { align-items: start; }
+  .ch-item[data-variant="3"] .ch-item__title { grid-column: 1 / 7; align-self: end; }
+  .ch-item[data-variant="3"] .ch-item__num { grid-column: 7 / 9; align-self: start; }
+  .ch-item[data-variant="3"] .ch-item__text { grid-column: 9 / 13; align-self: end; }
+
+  .ch-item__reveal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .ch-item:hover .ch-item__reveal,
+  .ch-item:focus-within .ch-item__reveal {
+    height: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ch-item__reveal { transition: none; }
+  }
+
+  @media (max-width: 700px) {
+    .ch-grid { --item-h: clamp(280px, 82vw, 360px); }
+    .ch-item__face,
+    .ch-item[data-variant] .ch-item__face { grid-template-columns: 1fr; align-items: start; row-gap: 8px; }
+    .ch-item[data-variant] .ch-item__num,
+    .ch-item[data-variant] .ch-item__title,
+    .ch-item[data-variant] .ch-item__text {
+      grid-column: 1 / -1;
+      grid-row: auto;
+      align-self: start;
+      text-align: left;
+    }
+  }
+</style>
