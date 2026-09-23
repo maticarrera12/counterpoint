@@ -1,0 +1,46 @@
+---
+import ImgSlot from '../ImgSlot.astro';
+---
+
+<section id="trabajo" class="pt-[clamp(40px,7vw,96px)] px-[clamp(16px,4vw,56px)] pb-[clamp(48px,8vw,110px)]">
+  <div class="flex justify-between items-baseline gap-4 text-[11px] tracking-[0.14em] uppercase font-semibold">
+    <span>06 / Trabajo seleccionado</span><span class="text-muted">Tres proyectos, resumidos</span>
+  </div>
+
+  <div class="grid grid-cols-12 gap-y-[clamp(16px,3vw,30px)] gap-x-[clamp(8px,1.6vw,22px)] mt-[clamp(24px,4vw,56px)] items-end">
+    <div class="col-[1/8] relative aspect-[16/10]">
+      <ImgSlot src="/img/nexo.webp" alt="nexo consulting">Conceptual: capas tipográficas, sombra larga</ImgSlot>
+    </div>
+    <div class="col-[7/13] relative z-[2] bg-bg pt-[clamp(12px,2vw,22px)] pr-0 pb-0 pl-[clamp(12px,2vw,24px)] border-l-2 border-accent">
+      <div class="text-accent text-[11px] tracking-[0.14em] uppercase font-semibold">Caso 01 — Consultora Nexo</div>
+      <h3 class="mt-[10px] mb-3 text-[clamp(24px,3.4vw,48px)] leading-[0.98] tracking-[-0.03em]">Construir una marca desde cero para una consultora nueva.</h3>
+      <p class="text-muted m-0 text-[clamp(13px,1.2vw,16px)] leading-[1.5] max-w-[46ch]">Sin identidad previa. Diseñamos la marca completa y el sitio, de punta a punta.</p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-12 gap-y-[clamp(16px,3vw,30px)] gap-x-[clamp(8px,1.6vw,22px)] mt-[clamp(40px,7vw,96px)] items-start">
+    <div class="col-[1/5]">
+      <div class="text-muted text-[11px] tracking-[0.14em] uppercase font-semibold">Caso 02 — Plataforma B2B</div>
+      <h3 class="mt-[10px] mb-3 text-[clamp(24px,3.4vw,48px)] leading-[0.98] tracking-[-0.03em]">Convertir la complejidad en claridad operativa.</h3>
+      <p class="text-muted m-0 text-[clamp(13px,1.2vw,16px)] leading-[1.5]">Doscientas pantallas heredadas. Doce que el usuario realmente usaba.</p>
+    </div>
+    <div class="col-[6/13] relative aspect-[21/9]">
+      <ImgSlot src="/img/automotriz.webp" alt="Automotriz">Conceptual: estructura densa y repetitiva</ImgSlot>
+    </div>
+    <div class="text-muted col-[6/13] text-[11px]">Fig. 06.2 — La reducción como acto estratégico</div>
+  </div>
+
+  <div class="grid grid-cols-12 gap-y-[clamp(16px,3vw,30px)] gap-x-[clamp(8px,1.6vw,22px)] mt-[clamp(40px,7vw,96px)] items-end">
+    <div class="col-[1/13] row-start-1 relative aspect-[24/9]">
+      <ImgSlot src="/img/lasalle.webp" alt="Lasalle"></ImgSlot>
+    </div>
+    <div class="col-[2/9] row-start-2 mt-[clamp(16px,3vw,40px)]">
+      <h3 class="m-0 text-text text-[clamp(24px,4.2vw,62px)] leading-[0.94] tracking-[-0.035em]">Llevar un negocio familiar de 20 años a su primera presencia digital real.</h3>
+    </div>
+    <div class="col-[9/13] row-start-2 text-right text-[11px] tracking-[0.14em] uppercase font-semibold mt-[clamp(16px,3vw,40px)]">Caso 03 — Estudio juridico con 20 años<br><span class="text-muted normal-case tracking-normal">Seis meses de trabajo silencioso, un lanzamiento visible.</span></div>
+    <div>
+
+    </div>
+
+  </div>
+</section>

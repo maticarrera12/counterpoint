@@ -3,13 +3,13 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/hero/Hero.astro';
-import Manifiesto from '../components/manifiesto/Manifiesto.astro';
-import Desafio from '../components/desafio/Desafio.astro';
-import Perspectivas from '../components/perspectivas/Perspectivas.astro';
-import Impacto from '../components/impacto/Impacto.astro';
-import Trabajo from '../components/trabajo/Trabajo.astro';
-import Proceso from '../components/proceso/Proceso.astro';
-import Contacto from '../components/contacto/Contacto.astro';
+import Manifesto from '../components/manifesto/Manifesto.astro';
+import Challenge from '../components/challenge/Challenge.astro';
+import Perspectives from '../components/perspectives/Perspectives.astro';
+import Impact from '../components/impact/Impact.astro';
+import Work from '../components/work/Work.astro';
+import Process from '../components/process/Process.astro';
+import Contact from '../components/contact/Contact.astro';
 ---
 
 <Layout
@@ -17,15 +17,15 @@ import Contacto from '../components/contacto/Contacto.astro';
   description="Estudio de diseño gráfico y desarrollo web con base en Buenos Aires, Argentina."
 >
   <Header />
-  <div style="background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); overflow-x: hidden; position: relative;">
+  <div class="bg-bg text-text font-body overflow-x-hidden relative">
     <Hero />
-    <Manifiesto />
-    <Desafio />
-    <Perspectivas />
-    <Impacto />
-    <Trabajo />
-    <Proceso />
-    <Contacto />
+    <Manifesto />
+    <Challenge />
+    <Perspectives />
+    <Impact />
+    <Work />
+    <Process />
+    <Contact />
     <Footer />
   </div>
 </Layout>

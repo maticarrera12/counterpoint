@@ -31,8 +31,8 @@ const items = [
 ];
 ---
 
-<section id="desafio" style="border-top: 2px solid var(--color-divider); padding: clamp(32px, 5vw, 60px) clamp(16px, 4vw, 56px) clamp(48px, 8vw, 110px);">
-  <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 16px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; margin-bottom: clamp(24px, 5vw, 60px);">
+<section id="desafio" class="border-t-2 border-divider pt-[clamp(32px,5vw,60px)] px-[clamp(16px,4vw,56px)] pb-[clamp(48px,8vw,110px)]">
+  <div class="flex justify-between items-baseline gap-4 text-[11px] tracking-[0.14em] uppercase font-semibold mb-[clamp(24px,5vw,60px)]">
     <span>03 / Lo que cuestionamos</span><span class="text-muted">Índice de disciplinas</span>
   </div>
 
@@ -40,13 +40,13 @@ const items = [
     {items.map((item) => (
       <div class="ch-item" data-variant={item.variant}>
         <div class="ch-item__face ch-item__face--base">
-          <div class="ch-item__num" style={item.accent ? 'color: var(--ac);' : ''}>{item.num}</div>
+          <div class:list={['ch-item__num', item.accent && 'text-accent']}>{item.num}</div>
           <h3 class="ch-item__title">{item.title}</h3>
           <p class="ch-item__text">{item.text}</p>
         </div>
         <div class="ch-item__reveal" aria-hidden="true">
           <div class="ch-item__face ch-item__face--inverted">
-            <div class="ch-item__num" style={item.accent ? 'color: var(--ac);' : ''}>{item.num}</div>
+            <div class:list={['ch-item__num', item.accent && 'text-accent']}>{item.num}</div>
             <h3 class="ch-item__title">{item.title}</h3>
             <p class="ch-item__text">{item.text}</p>
           </div>
