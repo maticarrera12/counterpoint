@@ -25,5 +25,10 @@ const { title, description } = Astro.props;
   </head>
   <body>
     <slot />
+    <script>
+      import '../scripts/reveal-titles';
+      import '../scripts/grow-sections';
+      import '../scripts/reveal-steps';
+    </script>
   </body>
 </html>

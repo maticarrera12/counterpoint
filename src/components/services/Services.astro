@@ -32,7 +32,7 @@ const items = [
 
 <section id="servicios" class="border-t-2 border-divider pt-[clamp(32px,5vw,60px)] px-[clamp(16px,4vw,56px)] pb-[clamp(48px,8vw,110px)]">
   <div class="text-[11px] tracking-[0.14em] uppercase font-semibold mb-[10px]">03 / Servicios</div>
-  <h2 class="m-0 text-[clamp(30px,5vw,78px)] leading-[0.94] tracking-[-0.04em] max-w-[16ch]">Lo que hacemos, sin vueltas.</h2>
+  <h2 class="m-0 text-[clamp(30px,5vw,78px)] leading-[0.94] tracking-[-0.04em] max-w-[16ch] uppercase">Lo que hacemos, sin vueltas.</h2>
   <p class="text-muted mt-3 mb-[clamp(24px,5vw,60px)] text-[clamp(15px,1.4vw,19px)] leading-[1.5] max-w-[52ch]">Tres formatos de trabajo. Todos con diseño y código propios, de punta a punta.</p>
 
   <div class="ch-grid">
@@ -71,20 +71,41 @@ const items = [
 <style>
   .ch-grid {
     --item-h: clamp(165px, 16vw, 240px);
+    --pad: clamp(16px, 4vw, 56px);
     display: grid;
     grid-template-columns: 1fr;
-    border-top: 1px solid var(--color-divider);
   }
 
   .ch-item {
     position: relative;
     height: var(--item-h);
-    overflow: hidden;
-    border-bottom: 1px solid var(--color-divider);
+    /* Clip vertically only: the hover layer bleeds to the viewport edges. */
+    overflow-x: visible;
+    overflow-y: clip;
   }
 
-  .ch-item:last-child {
-    border-bottom: 2px solid var(--color-divider);
+  /* Dividers live inside each card (not as borders) so the hover layer can cover them. */
+  .ch-item::before,
+  .ch-item:last-child::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: var(--color-divider);
+  }
+  .ch-item::before {
+    top: 0;
+    height: 1px;
+    /* Delay matches the hover layer so the line under a hovered card disappears once it lands. */
+    transition: opacity 0s linear 0.5s;
+  }
+  .ch-item:last-child::after {
+    bottom: 0;
+    height: 2px;
+  }
+  .ch-item:hover + .ch-item::before,
+  .ch-item:focus-within + .ch-item::before {
+    opacity: 0;
   }
 
   .ch-item__face {
@@ -104,6 +125,8 @@ const items = [
   .ch-item__face--inverted {
     background: var(--color-text);
     color: var(--color-bg);
+    /* The layer is wider than the grid by --pad each side; keep the content on its columns. */
+    padding-inline: var(--pad);
   }
 
   .ch-item__num {
@@ -148,9 +171,10 @@ const items = [
   .ch-item__reveal {
     position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
+    left: calc(var(--pad) * -1);
+    right: calc(var(--pad) * -1);
     height: 0;
+    z-index: 1;
     overflow: hidden;
     transition: height 0.5s cubic-bezier(0.65, 0, 0.35, 1);
   }

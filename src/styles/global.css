@@ -4,7 +4,7 @@
   --color-bg: #f3f2f2;
   --color-surface: #eae9e9;
   --color-text: #201e1d;
-  --color-accent: #ec3013;
+  --color-accent: #F63E02;
   --color-divider: color-mix(in srgb, #201e1d 40%, transparent);
 
   --font-heading: "Archivo", system-ui, sans-serif;
@@ -115,6 +115,49 @@
     text-align: center;
     color: color-mix(in srgb, var(--color-text) 45%, transparent);
     max-width: 22ch;
+  }
+
+  /* Section title reveal: each visual line is one unit, masked, that rises a short distance
+     with a slight drift to the right. --rv-in / --rv-out are per-line delays set by
+     reveal-titles.ts; the exit is the time-reverse of the entry. */
+  .rv-line {
+    display: block;
+    overflow: hidden;
+    padding: 0.14em 0.12em;
+    margin: -0.14em -0.12em;
+  }
+  .rv-line-i {
+    display: inline-block;
+    vertical-align: top;
+    white-space: nowrap;
+    transform: translate3d(-0.45em, 125%, 0);
+    transition: transform 0.6s cubic-bezier(0.64, 0, 0.78, 0) var(--rv-out, 0ms);
+  }
+  .rv-in .rv-line-i {
+    transform: none;
+    transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) var(--rv-in, 0ms);
+  }
+
+  /* Process steps: the text follows its title with a soft fade-up; the exit is quicker. */
+  .st-text {
+    opacity: 0;
+    transform: translate3d(0, 0.8em, 0);
+    transition:
+      opacity 0.4s cubic-bezier(0.64, 0, 0.78, 0),
+      transform 0.4s cubic-bezier(0.64, 0, 0.78, 0);
+  }
+  .rv-in .st-text {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1) 180ms,
+      transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) 180ms;
+  }
+
+  [data-grow] {
+    border-radius: 48px 48px 0 0;
+    transform-origin: 50% 0;
+    will-change: transform;
   }
 
   @keyframes cp-ticker {
