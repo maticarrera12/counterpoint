@@ -8,32 +8,36 @@ const sequence = Array.from({ length: repeats }, () => phrases).flat();
 ---
 
 <section id="top" class="relative pt-[clamp(24px,5vw,64px)] px-[clamp(16px,4vw,56px)] pb-0">
-  <div class="grid grid-cols-12 gap-x-[clamp(8px,1.6vw,22px)] gap-y-0 items-start">
-    <div class="col-[1/3] text-[11px] tracking-[0.14em] uppercase font-semibold">Vol. 01<br><span class="text-muted">Diseño & Código&nbsp;/ sept. 2026</span></div>
-    <div class="col-[9/13] text-[11px] tracking-[0.14em] uppercase font-semibold text-right">Estudio independiente<br><span class="text-muted">Buenos Aires, Argentina</span></div>
-    <div class="col-[1/13] h-0.5 bg-divider mt-[clamp(10px,1.6vw,20px)] mb-[clamp(12px,2vw,26px)]"></div>
+  <div>
+    <div class="flex flex-col md:flex-row md:justify-between gap-x-[clamp(8px,1.6vw,22px)] gap-y-0">
+      <div class="text-[11px] tracking-[0.14em] uppercase font-semibold">Vol. 01<br><span class="text-muted">Diseño & Código&nbsp;/ sept. 2026</span></div>
+      <div class="self-end md:self-auto text-[11px] tracking-[0.14em] uppercase font-semibold text-right">Estudio independiente<br><span class="text-muted">Buenos Aires, Argentina</span></div>
+    </div>
+    <div class="h-0.5 bg-divider mt-[clamp(10px,1.6vw,20px)] mb-[clamp(12px,2vw,26px)]"></div>
   </div>
 
-  <div class="relative grid grid-cols-12 gap-x-[clamp(8px,1.6vw,22px)] gap-y-0">
-    <h1 class="col-[1/12] row-start-1 m-0 text-[clamp(52px,13.2vw,188px)] leading-[0.84] tracking-[-0.045em] uppercase relative z-[3] mix-blend-multiply">
+  <div class="relative grid grid-cols-12 gap-x-[clamp(8px,1.6vw,22px)] gap-y-0 pt-20 md:pt-0">
+    <h1 class="col-[1/12] row-start-1 m-0 text-[clamp(52px,13.2vw,188px)] leading-[0.84] tracking-[-0.045em] uppercase relative z-3 mix-blend-multiply">
       <span class="whitespace-nowrap">nada es</span><br>
       <span class="inline-block">decorativo</span><br>
       todo es<br>
       delib<span class="text-accent">erado.</span>
     </h1>
-    <div class="col-[8/13] row-start-1 self-center mt-[clamp(40px,9vw,120px)] relative z-[1]">
-      <div class="relative w-full aspect-[3/4]">
+    <div class="col-[8/13] row-start-1 self-center mt-[clamp(40px,9vw,120px)] relative z-1">
+      <div class="relative w-full aspect-3/4">
         <ImgSlot src="/img/tower.webp" alt="Tratamientos">Conceptual: grilla tipográfica, sombra dura, masa abstracta</ImgSlot>
       </div>
       <div class="text-[11px] tracking-[0.06em] mt-2 flex justify-between gap-3"><span class="text-muted">Fig. 01 — Estructura antes que estilo</span><span class="text-accent">↘</span></div>
     </div>
   </div>
 
-  <div class="grid grid-cols-12 gap-y-[clamp(16px,3vw,32px)] gap-x-[clamp(8px,1.6vw,22px)] pt-[clamp(20px,4vw,52px)] pb-[clamp(28px,5vw,72px)] items-end">
-    <p class="col-[1/6] m-0 text-[clamp(16px,1.5vw,22px)] leading-[1.35] max-w-[34ch]">Diseñamos y desarrollamos sitios web y aplicaciones a medida para marcas y pymes.</p>
-    <div class="text-muted col-[6/9] text-[11px] leading-[1.5] tracking-[0.04em]">Un estudio de diseño y desarrollo<br>para marcas que no se conforman.</div>
-    <div class="col-[9/13] flex justify-end">
-      <a href="#contacto" class="btn btn-primary text-[13px] tracking-[0.1em] uppercase px-[22px] py-[14px]">Iniciar una conversación →</a>
+  <div class="grid pb:16 grid-cols-1 md:grid-cols-12 gap-y-[clamp(16px,3vw,32px)] gap-x-[clamp(8px,1.6vw,22px)] pt-[clamp(20px,4vw,52px)] pb-[clamp(28px,5vw,72px)] items-end">
+    <div class="flex flex-col gap-2 md:contents">
+      <p class="md:col-[1/6] m-0 text-[clamp(16px,1.5vw,22px)] leading-[1.35] max-w-[34ch]">Diseñamos y desarrollamos sitios web y aplicaciones a medida para marcas y pymes.</p>
+      <div class="text-muted md:col-[6/9] text-[11px] leading-normal tracking-[0.04em]">Un estudio de diseño y desarrollo<br>para marcas que no se conforman.</div>
+    </div>
+    <div class="md:col-[9/13] flex md:justify-end">
+      <a href="#contacto" class="btn btn-primary w-full md:w-auto text-[13px] tracking-widest uppercase px-5.5 py-3.5">Iniciar una conversación →</a>
     </div>
   </div>
 

@@ -1,6 +1,9 @@
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-grow]'));
 
+// Same breakpoint as Tailwind's `md`: below it the sections don't animate.
+const desktop = window.matchMedia('(min-width: 768px)');
+
 const START_SCALE = 0.93;
 // Fraction of the viewport height the section travels while it opens up to full width.
 const TRAVEL = 0.45;
@@ -11,6 +14,11 @@ const clamp = (n: number) => Math.min(1, Math.max(0, n));
 // and 1 once it has risen TRAVEL of the viewport. The top edge is the transform origin, so its
 // position (and this measurement) is unaffected by the scale.
 function update() {
+  if (!desktop.matches) {
+    for (const el of sections) el.style.transform = '';
+    return;
+  }
+
   const vh = window.innerHeight;
   for (const el of sections) {
     const progress = clamp((vh - el.getBoundingClientRect().top) / (vh * TRAVEL));
