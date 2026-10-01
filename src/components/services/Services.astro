@@ -152,9 +152,9 @@ const items = [
 
   /* Variant 01 — número y texto abajo, título arriba */
   .ch-item[data-variant="1"] .ch-item__face { align-items: start; }
-  .ch-item[data-variant="1"] .ch-item__num { grid-column: 1 / 5; align-self: end; }
-  .ch-item[data-variant="1"] .ch-item__title { grid-column: 5 / 9; align-self: start; }
-  .ch-item[data-variant="1"] .ch-item__text { grid-column: 9 / 13; align-self: end; }
+  .ch-item[data-variant="1"] .ch-item__num { grid-column: 1 / 5; grid-row: 1; align-self: end; }
+  .ch-item[data-variant="1"] .ch-item__title { grid-column: 5 / 9; grid-row: 1; align-self: start; }
+  .ch-item[data-variant="1"] .ch-item__text { grid-column: 9 / 13; grid-row: 1; align-self: end; }
 
   /* Variant 02 — texto y título arriba, número abajo */
   .ch-item[data-variant="2"] .ch-item__face { align-items: start; }
@@ -162,11 +162,15 @@ const items = [
   .ch-item[data-variant="2"] .ch-item__num { grid-column: 5 / 8; grid-row: 1; align-self: end; }
   .ch-item[data-variant="2"] .ch-item__title { grid-column: 8 / 13; grid-row: 1; align-self: start; }
 
-  /* Variant 03 — número arriba, título y texto abajo */
+  /* Variant 03 — número arriba, título y texto abajo.
+     grid-row: 1 is required here: the DOM order (num, title, text) doesn't match column
+     order (title sits left of num), and CSS Grid's sparse auto-placement pushes an item to a
+     new row once it would land behind the placement cursor — silently splitting this into two
+     rows and overflowing the card. Forcing row 1 on all three avoids that entirely. */
   .ch-item[data-variant="3"] .ch-item__face { align-items: start; }
-  .ch-item[data-variant="3"] .ch-item__title { grid-column: 1 / 7; align-self: end; }
-  .ch-item[data-variant="3"] .ch-item__num { grid-column: 7 / 9; align-self: start; }
-  .ch-item[data-variant="3"] .ch-item__text { grid-column: 9 / 13; align-self: end; }
+  .ch-item[data-variant="3"] .ch-item__title { grid-column: 1 / 7; grid-row: 1; align-self: end; }
+  .ch-item[data-variant="3"] .ch-item__num { grid-column: 7 / 9; grid-row: 1; align-self: start; }
+  .ch-item[data-variant="3"] .ch-item__text { grid-column: 9 / 13; grid-row: 1; align-self: end; }
 
   .ch-item__reveal {
     position: absolute;
@@ -188,7 +192,9 @@ const items = [
     .ch-item__reveal { transition: none; }
   }
 
-  @media (max-width: 700px) {
+  /* Below this, the 12-col layout doesn't have room for the paragraph text (up to ~8 short
+     lines in the narrowest columns) without overflowing the fixed card height — stack instead. */
+  @media (max-width: 960px) {
     .ch-grid { --item-h: clamp(280px, 82vw, 360px); }
     .ch-item__face,
     .ch-item[data-variant] .ch-item__face { grid-template-columns: 1fr; align-items: start; row-gap: 8px; }

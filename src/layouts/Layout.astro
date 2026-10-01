@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import WhatsAppWidget from '../components/WhatsAppWidget.astro';
 
 interface Props {
   title: string;
@@ -25,12 +26,14 @@ const { title, description } = Astro.props;
   </head>
   <body>
     <slot />
+    <WhatsAppWidget />
     <script>
       import '../scripts/reveal-titles';
       import '../scripts/grow-sections';
       import '../scripts/reveal-steps';
       import '../scripts/reveal-impact';
       import '../scripts/reveal-work';
+      import '../scripts/enhance-select';
     </script>
   </body>
 </html>

@@ -7,6 +7,8 @@ const whatsappHref = 'https://wa.me/5491154793056';
 const labelClass = 'block text-[11px] tracking-[0.14em] uppercase font-semibold mb-2';
 const fieldClass =
   'block w-full bg-transparent border-0 border-b-2 border-divider rounded-none px-0 py-3 text-[clamp(16px,1.4vw,20px)] leading-[1.4] text-text placeholder:text-muted transition-colors duration-300 focus:border-accent aria-[invalid=true]:border-accent';
+const selectClass =
+  'appearance-none pr-7 cursor-pointer [&>option]:text-text [&>option]:bg-bg';
 const errorClass = 'text-accent text-[12px] leading-[1.4] min-h-[1.4em] mt-1.5';
 ---
 
@@ -69,31 +71,35 @@ const errorClass = 'text-accent text-[12px] leading-[1.4] min-h-[1.4em] mt-1.5';
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-[clamp(20px,2.6vw,32px)] gap-x-[clamp(16px,3vw,40px)]">
           <div>
             <label for="contact-tipo" class={labelClass}>Tipo de proyecto</label>
-            <select
-              id="contact-tipo"
-              name="tipoProyecto"
-              required
-              aria-describedby="contact-tipo-error"
-              class={fieldClass}
-            >
-              <option value="" disabled selected>Elegí una opción</option>
-              {PROJECT_TYPES.map((o) => <option value={o.value}>{o.label}</option>)}
-            </select>
+            <div class="relative" data-enhance-select>
+              <select
+                id="contact-tipo"
+                name="tipoProyecto"
+                required
+                aria-describedby="contact-tipo-error"
+                class:list={[fieldClass, selectClass]}
+              >
+                <option value="" disabled selected>Elegí una opción</option>
+                {PROJECT_TYPES.map((o) => <option value={o.value}>{o.label}</option>)}
+              </select>
+            </div>
             <p id="contact-tipo-error" data-error-for="tipoProyecto" class={errorClass}></p>
           </div>
           <div>
             <label for="contact-presupuesto" class={labelClass}>
               Presupuesto <span class="text-muted normal-case tracking-normal font-normal">(opcional)</span>
             </label>
-            <select
-              id="contact-presupuesto"
-              name="presupuesto"
-              aria-describedby="contact-presupuesto-error"
-              class={fieldClass}
-            >
-              <option value="">Sin definir</option>
-              {BUDGETS.map((o) => <option value={o.value}>{o.label}</option>)}
-            </select>
+            <div class="relative" data-enhance-select>
+              <select
+                id="contact-presupuesto"
+                name="presupuesto"
+                aria-describedby="contact-presupuesto-error"
+                class:list={[fieldClass, selectClass]}
+              >
+                <option value="">Sin definir</option>
+                {BUDGETS.map((o) => <option value={o.value}>{o.label}</option>)}
+              </select>
+            </div>
             <p id="contact-presupuesto-error" data-error-for="presupuesto" class={errorClass}></p>
           </div>
         </div>

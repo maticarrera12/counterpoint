@@ -3,9 +3,10 @@ interface Props {
   dark?: boolean;
   src?: string;
   alt?: string;
+  fit?: 'contain' | 'cover';
 }
 
-const { dark = false, src, alt = '' } = Astro.props;
+const { dark = false, src, alt = '', fit = 'contain' } = Astro.props;
 ---
 
 <div
@@ -16,7 +17,7 @@ const { dark = false, src, alt = '' } = Astro.props;
   ]}
 >
   {src ? (
-    <img src={src} alt={alt} class="w-full h-full object-contain block" />
+    <img src={src} alt={alt} class:list={['w-full h-full block', fit === 'cover' ? 'object-cover' : 'object-contain']} />
   ) : (
     <span class:list={[dark && 'text-bg/60']}><slot /></span>
   )}

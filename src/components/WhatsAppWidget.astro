@@ -1,0 +1,61 @@
+---
+const phone = '5491154793056';
+const message = 'Hola, quiero hacer una consulta.';
+const href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Escribinos por WhatsApp"
+  class="wa-widget fixed right-4 bottom-4 md:right-6 md:bottom-6 z-50 flex items-center gap-3 rounded-full bg-accent text-bg shadow-[0_6px_20px_rgba(0,0,0,0.25)] transition-transform duration-300 hover:scale-105 focus-visible:scale-105"
+>
+  <span class="wa-ring" aria-hidden="true"></span>
+  <span class="relative flex h-14 w-14 shrink-0 items-center justify-center">
+    <svg viewBox="0 0 32 32" width="30" height="30" fill="currentColor" aria-hidden="true">
+      <path d="M16.004 3C9.377 3 4 8.377 4 15.004c0 2.42.71 4.675 1.934 6.567L4.6 27.6a1 1 0 0 0 1.223 1.222l6.03-1.334a11.94 11.94 0 0 0 4.15.74C22.63 28.228 28 22.85 28 16.223 28 9.596 22.63 4.219 16.004 3Zm0 22.23a9.73 9.73 0 0 1-4.966-1.36.997.997 0 0 0-.79-.104l-3.412.756.727-3.335a1 1 0 0 0-.126-.744A9.72 9.72 0 0 1 6.23 15.23c0-5.398 4.377-9.774 9.774-9.774 5.398 0 9.774 4.376 9.774 9.774 0 5.397-4.376 9.773-9.774 9.773v.227Z"></path>
+      <path d="M21.62 17.94c-.303-.152-1.79-.883-2.068-.984-.278-.102-.48-.152-.683.152-.202.303-.783.984-.96 1.187-.176.202-.353.227-.656.076-.303-.152-1.278-.471-2.434-1.503-.9-.803-1.508-1.795-1.685-2.098-.176-.303-.019-.467.133-.618.137-.136.303-.353.454-.53.152-.177.202-.303.303-.505.101-.202.05-.38-.025-.53-.076-.152-.684-1.647-.936-2.257-.247-.593-.498-.513-.684-.522l-.583-.01a1.12 1.12 0 0 0-.809.379c-.278.303-1.06 1.036-1.06 2.53 0 1.492 1.086 2.934 1.237 3.137.152.202 2.137 3.264 5.178 4.577.723.312 1.287.498 1.727.638.726.231 1.386.198 1.908.12.582-.087 1.79-.732 2.042-1.44.252-.707.252-1.313.176-1.44-.075-.127-.278-.202-.58-.353Z"></path>
+    </svg>
+  </span>
+  <span class="wa-label hidden md:block overflow-hidden whitespace-nowrap font-heading font-semibold text-[14px] pr-5">
+    Escribinos
+  </span>
+</a>
+
+<style>
+  .wa-widget {
+    isolation: isolate;
+  }
+
+  .wa-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background: var(--color-accent);
+    opacity: 0.55;
+    animation: wa-pulse 2.4s ease-out infinite;
+  }
+
+  @keyframes wa-pulse {
+    0% { transform: scale(1); opacity: 0.45; }
+    70% { transform: scale(1.35); opacity: 0; }
+    100% { transform: scale(1.35); opacity: 0; }
+  }
+
+  .wa-label {
+    max-width: 0;
+    transition: max-width 0.35s ease, padding 0.35s ease;
+    padding-right: 0;
+  }
+
+  .wa-widget:hover .wa-label,
+  .wa-widget:focus-visible .wa-label {
+    max-width: 140px;
+    padding-right: 20px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wa-ring { animation: none; display: none; }
+  }
+</style>
