@@ -1,5 +1,5 @@
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const titles = Array.from(document.querySelectorAll<HTMLElement>('section h2'));
+const titles = Array.from(document.querySelectorAll<HTMLElement>('section[data-reveal-title] h2'));
 
 const LINE_STEP = 90;
 

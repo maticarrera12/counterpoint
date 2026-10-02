@@ -1,0 +1,80 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// Single place to fill in: both show up in the copy below.
+const EMAIL_CONTACTO = 'proyectos@counterpoint.com';
+const PLAZO_RETENCION = '24 meses desde tu último contacto con nosotros';
+
+const secciones = [
+  {
+    titulo: 'Quiénes somos',
+    cuerpo: `Somos CounterPoint, un estudio de diseño y desarrollo web con base en Buenos Aires, Argentina. Si tenés alguna duda sobre esta política o sobre tus datos, escribinos a ${EMAIL_CONTACTO}.`,
+  },
+  {
+    titulo: 'Qué datos recopilamos',
+    cuerpo:
+      'Solo recopilamos los datos que vos mismo nos dejás al completar el formulario de contacto del sitio: tu nombre, tu email, tu WhatsApp (si querés dejarlo), el tipo de proyecto que tenés en mente, un presupuesto aproximado (si lo indicás) y el mensaje que nos escribís. No recopilamos ningún otro dato de forma automática.',
+  },
+  {
+    titulo: 'Para qué los usamos',
+    cuerpo:
+      'Los usamos únicamente para responder tu consulta y, si corresponde, prepararte una propuesta de trabajo. No los usamos para enviarte newsletters, publicidad ni ninguna otra comunicación que no hayas pedido.',
+  },
+  {
+    titulo: 'Con quién se comparten',
+    cuerpo:
+      'No vendemos ni cedemos tus datos a nadie. Para que el sitio funcione, los procesan algunos servicios externos en nuestro nombre: Vercel (hosting del sitio), Resend (envío de los mails que genera el formulario) y Zoho Mail (nuestra casilla de correo). Ninguno de estos servicios usa tus datos para fines propios.',
+  },
+  {
+    titulo: 'Cuánto tiempo los guardamos',
+    cuerpo: `Guardamos tus datos ${PLAZO_RETENCION}, salvo que la consulta se convierta en un proyecto, en cuyo caso los conservamos mientras dure esa relación de trabajo.`,
+  },
+  {
+    titulo: 'Cookies',
+    cuerpo: 'Este sitio no usa cookies de seguimiento ni de publicidad. No te rastreamos por otras páginas.',
+  },
+  {
+    titulo: 'Tus derechos',
+    cuerpo: `Tenés derecho a acceder a tus datos, pedir que los corrijamos o pedir que los eliminemos. Para cualquiera de estas opciones, escribinos a ${EMAIL_CONTACTO}.`,
+  },
+  {
+    titulo: 'Marco legal',
+    cuerpo:
+      'Esta política se rige por la Ley N.º 25.326 de Protección de Datos Personales. La AGENCIA DE ACCESO A LA INFORMACIÓN PÚBLICA, órgano de control de dicha ley, tiene la atribución de atender las denuncias y los reclamos que se interpongan por el incumplimiento de las normas sobre protección de datos personales.',
+  },
+  {
+    titulo: 'Cambios',
+    cuerpo: 'Esta política puede actualizarse con el tiempo. La fecha que figura arriba corresponde a la versión vigente.',
+  },
+];
+
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<Layout title="Privacidad — CounterPoint" description="Qué datos recopilamos en CounterPoint, para qué los usamos y cómo podés ejercer tus derechos sobre ellos.">
+  <Header />
+  <div class="bg-bg text-text font-body overflow-x-hidden relative">
+    <section class="pt-[clamp(32px,6vw,72px)] px-[clamp(16px,4vw,56px)] pb-[clamp(56px,9vw,130px)]">
+      <div class="max-w-[760px]">
+        <a href="/" class="text-[11px] tracking-[0.14em] uppercase font-semibold text-muted hover:text-accent transition-colors duration-300">← Volver al inicio</a>
+
+        <div class="text-[11px] tracking-[0.14em] uppercase font-semibold mt-[clamp(20px,4vw,40px)]">Legal</div>
+        <h1 class="m-0 mt-2 text-[clamp(34px,6vw,72px)] leading-[0.95] tracking-[-0.03em] uppercase">Privacidad</h1>
+        <p class="text-muted mt-3 text-[clamp(14px,1.2vw,17px)]">Última actualización: octubre 2026.</p>
+
+        <div class="mt-[clamp(32px,6vw,64px)] border-t-2 border-divider">
+          {secciones.map((s, i) => (
+            <div class="py-[clamp(22px,4vw,36px)] border-b border-divider">
+              <div class="text-accent font-heading font-extrabold text-[11px] tracking-[0.14em] uppercase">{pad(i + 1)}</div>
+              <h2 class="m-0 mt-2 text-[clamp(19px,2.2vw,28px)] leading-[1.15] tracking-[-0.02em]">{s.titulo}</h2>
+              <p class="text-muted mt-3 mb-0 text-[clamp(14px,1.2vw,16px)] leading-[1.6] max-w-[65ch]">{s.cuerpo}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+    <Footer />
+  </div>
+</Layout>

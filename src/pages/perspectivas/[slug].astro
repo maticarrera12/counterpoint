@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const papers = await getCollection('perspectivas');
+  return papers
+    .filter((entry) => entry.data.estado === 'terminado')
+    .map((entry) => ({
+      params: { slug: entry.id },
+      props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content } = await render(entry);
+
+const tipoLabel: Record<string, string> = {
+  ensayo: 'Ensayo',
+  'nota-de-campo': 'Nota de campo',
+  'lectura-extensa': 'Lectura extensa',
+};
+
+const metaParts = [data.numero, tipoLabel[data.tipo], data.fecha];
+if (data.tipo === 'lectura-extensa' && data.palabras) {
+  metaParts.push(`${data.palabras.toLocaleString('es-AR')} palabras`);
+}
+---
+
+<Layout title={`${data.titulo} — Perspectivas — CounterPoint`} description={data.resumen}>
+  <Header />
+  <div class="bg-bg text-text font-body overflow-x-hidden relative">
+    <section class="pt-[clamp(32px,6vw,72px)] px-[clamp(16px,4vw,56px)] pb-[clamp(56px,9vw,130px)]">
+      <div class="max-w-[760px]">
+        <a href="/perspectivas" class="text-[11px] tracking-[0.14em] uppercase font-semibold text-muted hover:text-accent transition-colors duration-300">← Volver al archivo</a>
+
+        <div class="text-accent text-[11px] tracking-[0.14em] uppercase font-semibold mt-[clamp(20px,4vw,40px)]">{metaParts.join(' · ')}</div>
+        <h1 class="m-0 mt-2 text-[clamp(32px,5.5vw,70px)] leading-[0.95] tracking-[-0.03em]">{data.titulo}</h1>
+        <p class="text-muted mt-4 text-[clamp(15px,1.4vw,19px)] leading-[1.6] max-w-[60ch]">{data.resumen}</p>
+
+        <div class="paper-content mt-[clamp(32px,6vw,56px)] border-t border-divider pt-[clamp(24px,4vw,40px)]">
+          <Content />
+        </div>
+      </div>
+    </section>
+    <Footer />
+  </div>
+</Layout>
