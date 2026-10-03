@@ -11,12 +11,34 @@ import Work from '../components/work/Work.astro';
 import Process from '../components/process/Process.astro';
 import CTA from '../components/cta/CTA.astro';
 import Contact from '../components/contact/Contact.astro';
+
+// Single place to fill in: both show up in the JSON-LD below.
+const EMAIL = 'completar@counterpoint.com';
+const LOCALIDAD = 'Completar localidad';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'CounterPoint',
+  url: 'https://estudiocounterpoint.com',
+  logo: 'https://estudiocounterpoint.com/favicon.ico',
+  description: 'Estudio de diseño y desarrollo web en Buenos Aires, Argentina.',
+  email: EMAIL,
+  areaServed: 'AR',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: LOCALIDAD,
+    addressRegion: 'Buenos Aires',
+    addressCountry: 'AR',
+  },
+};
 ---
 
 <Layout
-  title="CounterPoint — Diseño & Desarrollo Web"
-  description="Estudio de diseño gráfico y desarrollo web con base en Buenos Aires, Argentina."
+  title="CounterPoint — Estudio de diseño y desarrollo web"
+  description="Diseñamos y desarrollamos sitios web, landing pages y aplicaciones a medida para marcas y pymes. Estudio independiente en Buenos Aires."
 >
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <Header />
   <div class="bg-bg text-text font-body overflow-x-hidden relative">
     <Hero />

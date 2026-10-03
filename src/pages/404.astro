@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Página no encontrada — CounterPoint" description="La página que buscás no existe o fue movida." noindex={true}>
+  <Header />
+  <div class="bg-bg text-text font-body overflow-x-hidden relative">
+    <section class="pt-[clamp(32px,6vw,72px)] px-[clamp(16px,4vw,56px)] pb-[clamp(56px,9vw,130px)]">
+      <div class="max-w-[760px]">
+        <div class="text-[11px] tracking-[0.14em] uppercase font-semibold">Error 404</div>
+        <h1 class="m-0 mt-2 text-[clamp(34px,6vw,72px)] leading-[0.95] tracking-[-0.03em] uppercase">Esta página no existe.</h1>
+        <p class="text-muted mt-3 text-[clamp(14px,1.2vw,17px)]">Puede que el link esté roto o que la página se haya movido.</p>
+
+        <a href="/" class="inline-block mt-[clamp(32px,6vw,56px)] text-[11px] tracking-[0.14em] uppercase font-semibold text-muted hover:text-accent transition-colors duration-300">Volver al inicio</a>
+      </div>
+    </section>
+    <Footer />
+  </div>
+</Layout>

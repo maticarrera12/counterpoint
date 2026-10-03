@@ -4,9 +4,12 @@ interface Props {
   src?: string;
   alt?: string;
   fit?: 'contain' | 'cover';
+  width?: number;
+  height?: number;
+  loading?: 'eager' | 'lazy';
 }
 
-const { dark = false, src, alt = '', fit = 'contain' } = Astro.props;
+const { dark = false, src, alt = '', fit = 'contain', width, height, loading = 'lazy' } = Astro.props;
 ---
 
 <div
@@ -17,7 +20,14 @@ const { dark = false, src, alt = '', fit = 'contain' } = Astro.props;
   ]}
 >
   {src ? (
-    <img src={src} alt={alt} class:list={['w-full h-full block', fit === 'cover' ? 'object-cover' : 'object-contain']} />
+    <img
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      loading={loading}
+      class:list={['w-full h-full block', fit === 'cover' ? 'object-cover' : 'object-contain']}
+    />
   ) : (
     <span class:list={[dark && 'text-bg/60']}><slot /></span>
   )}

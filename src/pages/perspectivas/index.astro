@@ -15,6 +15,12 @@ const tipoLabel: Record<string, string> = {
   'lectura-extensa': 'Lectura extensa',
 };
 
+// Dimensiones reales (sips -g pixelWidth -g pixelHeight) de las imágenes usadas como data.imagen.
+const IMAGE_DIMENSIONS: Record<string, { width: number; height: number }> = {
+  '/img/metalmecanica.webp': { width: 1600, height: 1446 },
+  '/img/agroquimicos.webp': { width: 298, height: 488 },
+};
+
 function metaLine(data: (typeof papers)[number]['data']) {
   const tipo = tipoLabel[data.tipo];
   if (data.tipo === 'lectura-extensa' && data.palabras) {
@@ -61,7 +67,12 @@ function metaLine(data: (typeof papers)[number]['data']) {
               </div>
 
               <div class="md:col-[11/13] md:row-start-1 relative h-28 md:h-[clamp(70px,9vw,110px)]">
-                <ImgSlot src={data.imagen} alt={data.titulo} />
+                <ImgSlot
+                  src={data.imagen}
+                  alt={data.titulo}
+                  width={data.imagen ? IMAGE_DIMENSIONS[data.imagen]?.width : undefined}
+                  height={data.imagen ? IMAGE_DIMENSIONS[data.imagen]?.height : undefined}
+                />
               </div>
             </article>
           );
