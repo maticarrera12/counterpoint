@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { z } from 'zod';
 import { Resend } from 'resend';
 import { BUDGETS, BUDGET_VALUES, PROJECT_TYPES, PROJECT_TYPE_VALUES } from '../../lib/contact-options';
+import { confirmationEmailHtml, ownerNotificationHtml } from '../../lib/email-templates';
 
 export const prerender = false;
 
@@ -24,14 +25,6 @@ const json = (body: unknown, status: number) =>
     status,
     headers: { 'Content-Type': 'application/json' },
   });
-
-const escapeHtml = (value: string) =>
-  value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
 
 // Blank optional inputs arrive as empty strings from the browser; treat them as absent.
 const normalize = (raw: unknown) => {
@@ -87,20 +80,7 @@ export const POST: APIRoute = async ({ request }) => {
     ['Presupuesto', presupuestoLabel],
   ];
 
-  const ownerHtml = `
-    <div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.5;color:#201e1d">
-      <h2 style="margin:0 0 16px">Nueva consulta desde el sitio</h2>
-      <table style="border-collapse:collapse">
-        ${rows
-          .map(
-            ([k, v]) =>
-              `<tr><td style="padding:4px 16px 4px 0;color:#777"><strong>${k}</strong></td><td style="padding:4px 0">${escapeHtml(v)}</td></tr>`,
-          )
-          .join('')}
-      </table>
-      <p style="margin:20px 0 6px"><strong>Mensaje</strong></p>
-      <p style="margin:0;white-space:pre-wrap">${escapeHtml(data.mensaje)}</p>
-    </div>`;
+  const ownerHtml = ownerNotificationHtml({ tipoLabel, rows, mensaje: data.mensaje });
 
   try {
     const { error } = await resend.emails.send({
@@ -122,13 +102,7 @@ export const POST: APIRoute = async ({ request }) => {
       from,
       to: data.email,
       subject: 'Recibimos tu consulta — CounterPoint',
-      html: `
-        <div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.5;color:#201e1d">
-          <p>Hola ${escapeHtml(data.nombre)},</p>
-          <p>Recibimos tu consulta. Te respondemos dentro de las 48 hs hábiles.</p>
-          <p>Mientras tanto, si querés sumar algo, respondé directamente a este mail.</p>
-          <p>— CounterPoint</p>
-        </div>`,
+      html: confirmationEmailHtml({ nombre: data.nombre }),
     });
     if (error) throw new Error(error.message);
   } catch (err) {
