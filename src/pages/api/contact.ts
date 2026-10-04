@@ -101,6 +101,7 @@ export const POST: APIRoute = async ({ request }) => {
     const { error } = await resend.emails.send({
       from,
       to: data.email,
+      replyTo: to,
       subject: 'Recibimos tu consulta — CounterPoint',
       html: confirmationEmailHtml({ nombre: data.nombre }),
     });
