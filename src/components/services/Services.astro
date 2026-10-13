@@ -3,27 +3,24 @@ const items = [
   {
     num: '01',
     title: 'Landing pages',
-    hook: 'Una página, un objetivo: que el visitante haga algo.',
-    includes: 'diseño a medida, copy estructurado, formulario o WhatsApp integrado, SEO básico y analítica.',
-    plazo: '1 a 2 semanas.',
+    description: 'Diseñamos páginas enfocadas en presentar una oferta, comunicar su valor y convertir visitas en consultas u oportunidades comerciales.',
+    href: '/servicios#landing-pages',
     accent: false,
     variant: 1,
   },
   {
     num: '02',
-    title: 'Sitios institucionales',
-    hook: 'La presencia digital completa de una marca, pensada para durar.',
-    includes: 'arquitectura de contenido, diseño de todas las secciones, sitio autoadministrable si hace falta, SEO y performance.',
-    plazo: '3 a 6 semanas.',
+    title: 'Sitios web institucionales',
+    description: 'Creamos sitios que expresan la identidad de una empresa, organizan su propuesta de valor y construyen una presencia digital sólida y profesional.',
+    href: '/servicios#sitios-institucionales',
     accent: true,
     variant: 2,
   },
   {
     num: '03',
-    title: 'Aplicaciones web a medida',
-    hook: 'Cuando una planilla ya no alcanza.',
-    includes: 'CRMs, paneles de gestión, herramientas internas y plataformas con usuarios. Del relevamiento al deploy.',
-    plazo: 'según alcance.',
+    title: 'Rediseño web',
+    description: 'Repensamos sitios existentes para mejorar su comunicación, renovar su lenguaje visual y ofrecer una experiencia más clara, coherente y funcional.',
+    href: '/servicios#rediseno-web',
     accent: false,
     variant: 3,
   },
@@ -42,9 +39,8 @@ const items = [
           <div class:list={['ch-item__num', item.accent && 'text-accent']}>{item.num}</div>
           <h3 class="ch-item__title">{item.title}</h3>
           <p class="ch-item__text">
-            {item.hook}<br />
-            <strong>Incluye:</strong> {item.includes}<br />
-            <strong>Plazo:</strong> {item.plazo}
+            {item.description}<br />
+            <a href={item.href} class="ch-item__cta">Explorar el servicio ↗</a>
           </p>
         </div>
         <div class="ch-item__reveal" aria-hidden="true">
@@ -52,9 +48,8 @@ const items = [
             <div class:list={['ch-item__num', item.accent && 'text-accent']}>{item.num}</div>
             <h3 class="ch-item__title">{item.title}</h3>
             <p class="ch-item__text">
-              {item.hook}<br />
-              <strong>Incluye:</strong> {item.includes}<br />
-              <strong>Plazo:</strong> {item.plazo}
+              {item.description}<br />
+              <a href={item.href} class="ch-item__cta" tabindex="-1">Explorar el servicio ↗</a>
             </p>
           </div>
         </div>
@@ -148,6 +143,20 @@ const items = [
     margin: 0;
     font-size: clamp(14px, 1.2vw, 17px);
     line-height: 1.45;
+  }
+
+  .ch-item__cta {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    /* Global `a` sets the text color, which is dark on the inverted (dark) face. */
+    color: inherit;
+  }
+  .ch-item__cta:hover {
+    color: var(--color-accent);
   }
 
   /* Variant 01 — número y texto abajo, título arriba */
