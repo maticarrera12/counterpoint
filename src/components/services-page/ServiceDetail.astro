@@ -7,10 +7,11 @@ interface Props {
   work: string;
   includes: string;
   ctaLabel: string;
+  projectType: string;
   accent?: boolean;
 }
 
-const { id, num, title, purpose, work, includes, ctaLabel, accent = false } = Astro.props;
+const { id, num, title, purpose, work, includes, ctaLabel, projectType, accent = false } = Astro.props;
 
 const blocks = [
   { label: 'Para qué sirve', body: purpose },
@@ -35,7 +36,7 @@ const blocks = [
         ))}
       </div>
 
-      <a href="/#contacto" class="inline-block mt-[clamp(16px,2.4vw,28px)] text-accent text-[11px] tracking-[0.14em] uppercase font-semibold">{ctaLabel} →</a>
+      <a href={`/?tipo=${projectType}#contacto`} class="inline-block mt-[clamp(16px,2.4vw,28px)] text-accent text-[11px] tracking-[0.14em] uppercase font-semibold">{ctaLabel} →</a>
     </div>
   </div>
 </section>

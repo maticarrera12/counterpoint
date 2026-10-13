@@ -167,6 +167,9 @@ function enhance(wrapper: HTMLElement) {
     else trigger.removeAttribute('aria-invalid');
   }).observe(select, { attributes: true, attributeFilter: ['aria-invalid'] });
 
+  // Programmatic changes (e.g. URL preselection) dispatch `change`; keep the label in sync.
+  select.addEventListener('change', setLabel);
+
   select.classList.add('sr-only');
   select.setAttribute('aria-hidden', 'true');
   select.tabIndex = -1;

@@ -157,6 +157,14 @@ const errorClass = 'text-accent text-[12px] leading-[1.4] min-h-[1.4em] mt-1.5';
     const successBox = document.getElementById('contact-success') as HTMLElement;
     const idleLabel = submitBtn.dataset.label ?? submitBtn.textContent ?? '';
 
+    // Preselect the project type from `?tipo=` (links from /servicios). Only known values apply.
+    const tipoSelect = form.elements.namedItem('tipoProyecto') as HTMLSelectElement | null;
+    const tipoParam = new URLSearchParams(window.location.search).get('tipo');
+    if (tipoSelect && tipoParam && Array.from(tipoSelect.options).some((o) => o.value === tipoParam && !o.disabled)) {
+      tipoSelect.value = tipoParam;
+      tipoSelect.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+
     // Native validation stays as the no-JS fallback; with JS we render inline messages instead.
     form.noValidate = true;
 
