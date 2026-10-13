@@ -1,0 +1,41 @@
+---
+interface Props {
+  id: string;
+  num: string;
+  title: string;
+  purpose: string;
+  work: string;
+  includes: string;
+  ctaLabel: string;
+  accent?: boolean;
+}
+
+const { id, num, title, purpose, work, includes, ctaLabel, accent = false } = Astro.props;
+
+const blocks = [
+  { label: 'Para qué sirve', body: purpose },
+  { label: 'Qué trabajamos', body: work },
+  { label: 'Qué puede incluir', body: includes },
+];
+---
+
+<section id={id} class="scroll-mt-24 border-t-2 border-divider py-[clamp(36px,6vw,88px)] px-[clamp(16px,4vw,56px)]">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-y-[clamp(16px,3vw,32px)] gap-x-[clamp(8px,1.6vw,22px)]">
+    <div class:list={['md:col-[1/4] font-heading font-extrabold text-[clamp(56px,9vw,130px)] leading-[0.8] tracking-[-0.05em]', accent && 'text-accent']}>{num}</div>
+
+    <div class="md:col-[4/13]">
+      <h2 class="m-0 text-[clamp(28px,4.4vw,64px)] leading-[0.94] tracking-[-0.04em] uppercase">{title}</h2>
+
+      <div class="mt-[clamp(24px,4vw,48px)] grid grid-cols-1 lg:grid-cols-3 border-t border-divider">
+        {blocks.map((block) => (
+          <div class="py-[clamp(16px,2.4vw,28px)] border-b border-divider lg:border-b-0 lg:pr-[clamp(12px,2vw,28px)]">
+            <h3 class="m-0 text-[11px] tracking-[0.14em] uppercase font-semibold text-accent">{block.label}</h3>
+            <p class="m-0 mt-2 text-[clamp(15px,1.3vw,18px)] leading-[1.5]">{block.body}</p>
+          </div>
+        ))}
+      </div>
+
+      <a href="/#contacto" class="inline-block mt-[clamp(16px,2.4vw,28px)] text-accent text-[11px] tracking-[0.14em] uppercase font-semibold">{ctaLabel} →</a>
+    </div>
+  </div>
+</section>

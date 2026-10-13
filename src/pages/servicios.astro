@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ServiceDetail from '../components/services-page/ServiceDetail.astro';
+import ProcessSteps from '../components/services-page/ProcessSteps.astro';
+
+const services = [
+  {
+    id: 'landing-pages',
+    num: '01',
+    title: 'Landing pages',
+    purpose: 'Presentar un servicio, producto, campaña u oferta específica.',
+    work: 'Estructura, jerarquía del mensaje, redacción, dirección visual y desarrollo responsive.',
+    includes: 'Formularios, enlaces de contacto, SEO técnico básico y publicación.',
+    ctaLabel: 'Consultar por una landing page',
+  },
+  {
+    id: 'sitios-institucionales',
+    num: '02',
+    title: 'Sitios web institucionales',
+    purpose: 'Presentar una empresa, sus servicios, su equipo y su propuesta de valor.',
+    work: 'Arquitectura de información, navegación, contenido, identidad visual aplicada y desarrollo.',
+    includes: 'Páginas de servicios, formularios, integraciones básicas y SEO técnico.',
+    ctaLabel: 'Consultar por un sitio institucional',
+    accent: true,
+  },
+  {
+    id: 'rediseno-web',
+    num: '03',
+    title: 'Rediseño web',
+    purpose: 'Resolver problemas de comunicación, presentación, estructura o experiencia en un sitio existente.',
+    work: 'Evaluación del sitio actual, prioridades de mejora, nueva dirección visual y reconstrucción según el alcance.',
+    includes: 'Renovación visual, reorganización de contenido, mejoras responsive y optimización técnica.',
+    ctaLabel: 'Evaluar mi sitio web',
+  },
+];
+---
+
+<Layout
+  title="Servicios — CounterPoint"
+  description="Landing pages, sitios web institucionales y rediseño web. Qué trabajamos en cada servicio, qué puede incluir y cómo es el proceso en CounterPoint."
+>
+  <Header />
+  <div class="bg-bg text-text font-body overflow-x-hidden relative">
+    <section class="pt-[clamp(32px,6vw,72px)] px-[clamp(16px,4vw,56px)] pb-[clamp(32px,5vw,64px)]">
+      <a href="/" class="text-[11px] tracking-[0.14em] uppercase font-semibold text-muted hover:text-accent transition-colors duration-300">← Volver al inicio</a>
+
+      <div class="text-[11px] tracking-[0.14em] uppercase font-semibold mt-[clamp(20px,4vw,40px)]">Servicios</div>
+      <h1 class="m-0 mt-2 text-[clamp(34px,6vw,96px)] leading-[0.92] tracking-[-0.04em] uppercase max-w-[16ch]">Tres formas de trabajar. Un mismo criterio.</h1>
+      <p class="text-muted mt-4 mb-0 text-[clamp(15px,1.4vw,19px)] leading-[1.5] max-w-[52ch]">Landing pages, sitios institucionales y rediseños: cada formato con diseño y desarrollo propios, de punta a punta.</p>
+    </section>
+
+    {services.map((service) => <ServiceDetail {...service} />)}
+
+    <ProcessSteps />
+
+    <section class="border-t-2 border-divider py-[clamp(32px,5vw,64px)] px-[clamp(16px,4vw,56px)]">
+      <p class="m-0 text-[clamp(15px,1.3vw,18px)] leading-[1.6] max-w-[65ch]">Cada proyecto se define según sus objetivos y necesidades. El alcance, los entregables, los plazos y la inversión se establecen antes de comenzar. Las funcionalidades especiales y los servicios externos se evalúan y cotizan por separado.</p>
+    </section>
+
+    <section data-reveal-title class="bg-accent text-bg pt-[clamp(48px,9vw,130px)] px-[clamp(16px,4vw,56px)] pb-[clamp(48px,9vw,130px)]">
+      <div class="grid grid-cols-12 gap-y-[clamp(20px,4vw,44px)] gap-x-[clamp(8px,1.6vw,22px)]">
+        <h2 class="col-[1/13] md:col-[1/12] m-0 text-[clamp(38px,8.4vw,136px)] leading-[0.88] tracking-[-0.045em]">El próximo paso nunca debería ser automático.</h2>
+        <p class="col-[1/13] md:col-[1/6] m-0 text-[clamp(15px,1.4vw,20px)] leading-[1.4]">Contanos qué necesitás y vemos juntos cuál es el mejor formato.</p>
+        <div class="col-[1/13] md:col-[9/13] flex items-end md:justify-end">
+          <a href="/#contacto" class="cta-sweep font-heading font-extrabold text-[clamp(15px,1.6vw,22px)] tracking-[-0.01em] text-bg"><span class="cta-sweep-label" data-text="Empezar la conversación →">Empezar la conversación →</span><span class="cta-sweep-underline"></span></a>
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+  </div>
+</Layout>
