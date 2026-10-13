@@ -1,8 +1,9 @@
 ---
-import { BUDGETS, PROJECT_TYPES } from '../../lib/contact-options';
+import { PROJECT_TYPES } from '../../lib/contact-options';
+import { whatsappUrl } from '../../lib/whatsapp';
 
 const contactEmail = 'proyectos@estudiocounterpoint.com';
-const whatsappHref = 'https://wa.me/5491154793056';
+const whatsappHref = whatsappUrl('Hola, quiero hacer una consulta.');
 
 const labelClass = 'block text-[11px] tracking-[0.14em] uppercase font-semibold mb-2';
 const fieldClass =
@@ -54,66 +55,32 @@ const errorClass = 'text-accent text-[12px] leading-[1.4] min-h-[1.4em] mt-1.5';
         </div>
 
         <div>
-          <label for="contact-whatsapp" class={labelClass}>
-            WhatsApp <span class="text-muted normal-case tracking-normal font-normal">(opcional)</span>
-          </label>
-          <input
-            id="contact-whatsapp"
-            name="whatsapp"
-            type="tel"
-            autocomplete="tel"
-            aria-describedby="contact-whatsapp-error"
-            class={fieldClass}
-          />
-          <p id="contact-whatsapp-error" data-error-for="whatsapp" class={errorClass}></p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-[clamp(20px,2.6vw,32px)] gap-x-[clamp(16px,3vw,40px)]">
-          <div>
-            <label for="contact-tipo" class={labelClass}>Tipo de proyecto</label>
-            <div class="relative" data-enhance-select>
-              <select
-                id="contact-tipo"
-                name="tipoProyecto"
-                required
-                aria-describedby="contact-tipo-error"
-                class:list={[fieldClass, selectClass]}
-              >
-                <option value="" disabled selected>Elegí una opción</option>
-                {PROJECT_TYPES.map((o) => <option value={o.value}>{o.label}</option>)}
-              </select>
-            </div>
-            <p id="contact-tipo-error" data-error-for="tipoProyecto" class={errorClass}></p>
+          <label for="contact-tipo" class={labelClass}>Tipo de proyecto</label>
+          <div class="relative" data-enhance-select>
+            <select
+              id="contact-tipo"
+              name="tipoProyecto"
+              required
+              aria-describedby="contact-tipo-error"
+              class:list={[fieldClass, selectClass]}
+            >
+              <option value="" disabled selected>Elegí una opción</option>
+              {PROJECT_TYPES.map((o) => <option value={o.value}>{o.label}</option>)}
+            </select>
           </div>
-          <div>
-            <label for="contact-presupuesto" class={labelClass}>
-              Presupuesto <span class="text-muted normal-case tracking-normal font-normal">(opcional)</span>
-            </label>
-            <div class="relative" data-enhance-select>
-              <select
-                id="contact-presupuesto"
-                name="presupuesto"
-                aria-describedby="contact-presupuesto-error"
-                class:list={[fieldClass, selectClass]}
-              >
-                <option value="">Sin definir</option>
-                {BUDGETS.map((o) => <option value={o.value}>{o.label}</option>)}
-              </select>
-            </div>
-            <p id="contact-presupuesto-error" data-error-for="presupuesto" class={errorClass}></p>
-          </div>
+          <p id="contact-tipo-error" data-error-for="tipoProyecto" class={errorClass}></p>
         </div>
 
         <div>
-          <label for="contact-mensaje" class={labelClass}>Mensaje</label>
+          <label for="contact-mensaje" class={labelClass}>
+            Mensaje <span class="text-muted normal-case tracking-normal font-normal">(opcional)</span>
+          </label>
           <textarea
             id="contact-mensaje"
             name="mensaje"
             rows="5"
-            required
-            minlength="20"
             aria-describedby="contact-mensaje-error"
-            placeholder="Qué necesitás, para cuándo y qué problema querés resolver."
+            placeholder="Si querés, contanos qué necesitás y para cuándo."
             class:list={[fieldClass, 'resize-y min-h-[8rem]']}
           ></textarea>
           <p id="contact-mensaje-error" data-error-for="mensaje" class={errorClass}></p>
@@ -132,6 +99,12 @@ const errorClass = 'text-accent text-[12px] leading-[1.4] min-h-[1.4em] mt-1.5';
             data-label="Enviar consulta →"
             class="btn btn-primary text-[13px] tracking-[0.1em] uppercase px-[22px] py-[14px] disabled:opacity-60 disabled:cursor-not-allowed"
           >Enviar consulta →</button>
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-[13px] leading-[1.4] text-muted underline underline-offset-4 decoration-divider transition-colors duration-300 hover:text-text hover:decoration-accent"
+          >O escribinos por WhatsApp ↗</a>
         </div>
 
         <div
@@ -166,10 +139,6 @@ const errorClass = 'text-accent text-[12px] leading-[1.4] min-h-[1.4em] mt-1.5';
       <div class="border-t-2 border-accent pt-2.5">
         <div class="text-[11px] tracking-[0.14em] uppercase font-semibold mb-2">Mail directo</div>
         <a href={`mailto:${contactEmail}`} class="text-[clamp(16px,1.5vw,22px)] leading-[1.3] break-words">{contactEmail}</a>
-      </div>
-      <div class="border-t-2 border-divider pt-2.5">
-        <div class="text-[11px] tracking-[0.14em] uppercase font-semibold mb-2">WhatsApp</div>
-        <a href={whatsappHref} target="_blank" rel="noopener noreferrer" class="text-[clamp(16px,1.5vw,22px)] leading-[1.3]">+54 11 5479 3056</a>
       </div>
       <div class="border-t-2 border-divider pt-2.5">
         <div class="text-[11px] tracking-[0.14em] uppercase font-semibold mb-2">Oficina</div>
@@ -211,7 +180,6 @@ const errorClass = 'text-accent text-[12px] leading-[1.4] min-h-[1.4em] mt-1.5';
       email: (v, f) =>
         v.trim() && (f as HTMLInputElement).validity.valid ? '' : 'Ingresá un email válido.',
       tipoProyecto: (v) => (v ? '' : 'Elegí un tipo de proyecto.'),
-      mensaje: (v) => (v.trim().length >= 20 ? '' : 'Contanos un poco más (mínimo 20 caracteres).'),
     };
 
     const validateAll = () => {

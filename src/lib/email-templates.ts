@@ -71,8 +71,22 @@ export function ownerNotificationHtml({
 }: {
   tipoLabel: string;
   rows: Array<[string, string]>;
-  mensaje: string;
+  mensaje?: string;
 }): string {
+  const messageHtml = mensaje
+    ? `
+    <tr>
+      <td style="padding:0 0 6px;font-family:${FONT_STACK};font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:${COLOR_MUTED};">
+        Mensaje
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:0 0 4px;font-family:${FONT_STACK};font-size:15px;line-height:1.6;color:${COLOR_TEXT};white-space:pre-wrap;">${escapeHtml(mensaje)}</td>
+    </tr>`
+    : `
+    <tr>
+      <td style="padding:0 0 4px;font-family:${FONT_STACK};font-size:14px;line-height:1.6;color:${COLOR_MUTED};">Sin mensaje</td>
+    </tr>`;
   const body = `
     <tr>
       <td style="padding:28px 0 8px;font-family:${FONT_STACK};font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;color:${COLOR_ACCENT};">
@@ -99,14 +113,7 @@ export function ownerNotificationHtml({
         </table>
       </td>
     </tr>
-    <tr>
-      <td style="padding:0 0 6px;font-family:${FONT_STACK};font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:${COLOR_MUTED};">
-        Mensaje
-      </td>
-    </tr>
-    <tr>
-      <td style="padding:0 0 4px;font-family:${FONT_STACK};font-size:15px;line-height:1.6;color:${COLOR_TEXT};white-space:pre-wrap;">${escapeHtml(mensaje)}</td>
-    </tr>`;
+    ${messageHtml}`;
   return emailShell(body);
 }
 

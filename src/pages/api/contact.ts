@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { z } from 'zod';
 import { Resend } from 'resend';
-import { BUDGETS, BUDGET_VALUES, PROJECT_TYPES, PROJECT_TYPE_VALUES } from '../../lib/contact-options';
+import { PROJECT_TYPES, PROJECT_TYPE_VALUES } from '../../lib/contact-options';
 import { confirmationEmailHtml, ownerNotificationHtml } from '../../lib/email-templates';
 
 export const prerender = false;
@@ -9,14 +9,8 @@ export const prerender = false;
 const schema = z.object({
   nombre: z.string().trim().min(1, { error: 'Contanos tu nombre.' }).max(120),
   email: z.email({ error: 'Ingresá un email válido.' }).max(200),
-  whatsapp: z.string().trim().max(40).optional(),
   tipoProyecto: z.enum(PROJECT_TYPE_VALUES, { error: 'Elegí un tipo de proyecto.' }),
-  presupuesto: z.enum(BUDGET_VALUES).optional(),
-  mensaje: z
-    .string()
-    .trim()
-    .min(20, { error: 'Contanos un poco más (mínimo 20 caracteres).' })
-    .max(5000),
+  mensaje: z.string().trim().max(5000).optional(),
   empresa_web: z.string().optional(),
 });
 
@@ -30,7 +24,7 @@ const json = (body: unknown, status: number) =>
 const normalize = (raw: unknown) => {
   if (typeof raw !== 'object' || raw === null) return raw;
   const out: Record<string, unknown> = { ...(raw as Record<string, unknown>) };
-  for (const key of ['whatsapp', 'presupuesto']) {
+  for (const key of ['mensaje']) {
     if (out[key] === '') delete out[key];
   }
   return out;
@@ -68,16 +62,11 @@ export const POST: APIRoute = async ({ request }) => {
   const resend = new Resend(apiKey);
 
   const tipoLabel = PROJECT_TYPES.find((o) => o.value === data.tipoProyecto)?.label ?? data.tipoProyecto;
-  const presupuestoLabel = data.presupuesto
-    ? (BUDGETS.find((o) => o.value === data.presupuesto)?.label ?? data.presupuesto)
-    : 'No indicado';
 
   const rows: Array<[string, string]> = [
     ['Nombre', data.nombre],
     ['Email', data.email],
-    ['WhatsApp', data.whatsapp || 'No indicado'],
     ['Tipo de proyecto', tipoLabel],
-    ['Presupuesto', presupuestoLabel],
   ];
 
   const ownerHtml = ownerNotificationHtml({ tipoLabel, rows, mensaje: data.mensaje });

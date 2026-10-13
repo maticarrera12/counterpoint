@@ -1,7 +1,8 @@
 ---
-const phone = '5491154793056';
+import { whatsappUrl } from '../lib/whatsapp';
+
 const message = 'Hola, quiero hacer una consulta.';
-const href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+const href = whatsappUrl(message);
 ---
 
 <a
