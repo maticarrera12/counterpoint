@@ -30,13 +30,13 @@ const blocks = [
       <div class="mt-[clamp(24px,4vw,48px)] grid grid-cols-1 lg:grid-cols-3 border-t border-divider">
         {blocks.map((block) => (
           <div class="py-[clamp(16px,2.4vw,28px)] border-b border-divider lg:border-b-0 lg:pr-[clamp(12px,2vw,28px)]">
-            <h3 class="m-0 text-[11px] tracking-[0.14em] uppercase font-semibold text-accent">{block.label}</h3>
+            <h3 class="m-0 text-[13px] tracking-[0.08em] uppercase font-semibold text-accent">{block.label}</h3>
             <p class="m-0 mt-2 text-[clamp(15px,1.3vw,18px)] leading-[1.5]">{block.body}</p>
           </div>
         ))}
       </div>
 
-      <a href={`/?tipo=${projectType}#contacto`} class="inline-block mt-[clamp(16px,2.4vw,28px)] text-accent text-[11px] tracking-[0.14em] uppercase font-semibold">{ctaLabel} →</a>
+      <a href={`/?tipo=${projectType}#contacto`} class="inline-block mt-[clamp(16px,2.4vw,28px)] text-accent text-[13px] tracking-[0.08em] uppercase font-semibold">{ctaLabel} →</a>
     </div>
   </div>
 </section>

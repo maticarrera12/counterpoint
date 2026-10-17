@@ -10,7 +10,7 @@ const href = whatsappUrl(message);
   target="_blank"
   rel="noopener noreferrer"
   aria-label="Escribinos por WhatsApp"
-  class="wa-widget fixed right-4 bottom-4 md:right-6 md:bottom-6 z-50 flex items-center gap-3 rounded-full bg-accent text-bg shadow-[0_6px_20px_rgba(0,0,0,0.25)] transition-transform duration-300 hover:scale-105 focus-visible:scale-105"
+  class="wa-widget fixed right-4 bottom-4 md:right-6 md:bottom-6 z-50 flex items-center gap-3 rounded-full bg-accent text-bg shadow-[0_6px_20px_rgba(0,0,0,0.25)] transition-[scale] duration-300 hover:scale-105 focus-visible:scale-105"
 >
   <span class="wa-ring" aria-hidden="true"></span>
   <span class="relative flex h-14 w-14 shrink-0 items-center justify-center">
@@ -60,3 +60,33 @@ const href = whatsappUrl(message);
     .wa-ring { animation: none; display: none; }
   }
 </style>
+
+<script>
+  // Keep the button above the footer: once the footer's top edge enters the viewport,
+  // lift the button by the overlap so it rests on it instead of covering it. No CSS transition on translate: it would lag behind the scroll.
+  const widget = document.querySelector<HTMLElement>('.wa-widget');
+  const footer = document.querySelector('footer');
+
+  if (widget && footer) {
+    let ticking = false;
+    const GAP = 12;
+
+    const update = () => {
+      ticking = false;
+      const offset = parseFloat(getComputedStyle(widget).bottom) || 0;
+      const restingBottom = window.innerHeight - offset;
+      const lift = Math.max(0, restingBottom - (footer.getBoundingClientRect().top - GAP));
+      widget.style.translate = lift ? `0 -${lift}px` : '';
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+  }
+</script>

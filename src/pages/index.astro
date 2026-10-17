@@ -3,13 +3,13 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/hero/Hero.astro';
+import Offer from '../components/offer/Offer.astro';
+import BigCTA from '../components/big-cta/BigCTA.astro';
+import SelectedWork from '../components/selected-work/SelectedWork.astro';
+import CaseStudy from '../components/case-study/CaseStudy.astro';
 import Manifesto from '../components/manifesto/Manifesto.astro';
-import Services from '../components/services/Services.astro';
-import Perspectives from '../components/perspectives/Perspectives.astro';
 import Impact from '../components/impact/Impact.astro';
-import Work from '../components/work/Work.astro';
 import Process from '../components/process/Process.astro';
-import CTA from '../components/cta/CTA.astro';
 import Contact from '../components/contact/Contact.astro';
 
 // Single place to fill in: both show up in the JSON-LD below.
@@ -42,12 +42,12 @@ const jsonLd = {
   <Header />
   <div class="bg-bg text-text font-body overflow-x-hidden relative">
     <Hero />
+    <Offer />
+    <BigCTA />
+    <SelectedWork />
     <Manifesto />
-    <Services />
-    <Perspectives />
-    <div class="bg-text -mt-px flow-root"><Impact /></div>
-    <CTA />
-    <div class="bg-accent -mt-px flow-root"><Work /></div>
+    <CaseStudy />
+    <div class="-mt-px flow-root"><Impact /></div>
     <Process />
     <Contact />
     <Footer />

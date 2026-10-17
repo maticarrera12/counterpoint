@@ -15,7 +15,7 @@ export const escapeHtml = (value: string) =>
 
 const FONT_STACK = "Arial, Helvetica, sans-serif";
 const COLOR_BG = '#f3f2f2';
-const COLOR_TEXT = '#201e1d';
+const COLOR_TEXT = '#1E1C1C';
 const COLOR_ACCENT = '#F63E02';
 const COLOR_DIVIDER = 'rgba(32,30,29,0.4)';
 const COLOR_MUTED = 'rgba(32,30,29,0.55)';

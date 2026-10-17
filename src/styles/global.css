@@ -3,12 +3,13 @@
 @theme {
   --color-bg: #f3f2f2;
   --color-surface: #eae9e9;
-  --color-text: #201e1d;
+  --color-text: #1E1C1C;
   --color-accent: #F63E02;
-  --color-divider: color-mix(in srgb, #201e1d 40%, transparent);
+  --color-divider: color-mix(in srgb, #1E1C1C 40%, transparent);
 
   --font-heading: "Archivo", system-ui, sans-serif;
   --font-body: "Archivo", system-ui, sans-serif;
+  --font-display: "Anton", "Archivo", system-ui, sans-serif;
 }
 
 :root {
@@ -109,7 +110,7 @@
     padding: 10px;
   }
   .img-slot span {
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     text-align: center;
