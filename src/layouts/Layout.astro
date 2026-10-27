@@ -17,6 +17,7 @@ const { title, description, image, noindex } = Astro.props;
 <html lang="es-AR">
   <head>
     <meta charset="utf-8" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <Seo title={title} description={description} image={image} noindex={noindex} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -43,7 +44,7 @@ const { title, description, image, noindex } = Astro.props;
       import '../scripts/grow-sections';
       import '../scripts/reveal-steps';
       import '../scripts/reveal-impact';
-      import '../scripts/reveal-work';
+      import '../scripts/reveal';
       import '../scripts/enhance-select';
     </script>
   </body>

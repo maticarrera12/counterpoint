@@ -1,11 +1,12 @@
-<div class="sticky top-0 z-40">
-  <header id="site-header" class="bg-bg border-b-2 border-divider grid grid-cols-[1fr_auto] items-end gap-4 pt-[10px] px-[clamp(16px,4vw,56px)] pb-2 transition-transform duration-[250ms] ease-[ease] will-change-transform">
-    <a href="/#top" class="font-heading font-extrabold text-[clamp(15px,1.6vw,21px)] tracking-[-0.03em] uppercase leading-none">CounterPoint<span class="text-accent">.</span></a>
+<div id="site-chrome" class="sticky top-0 z-40">
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <header id="site-header" class="bg-bg border-b-2 border-divider grid grid-cols-[1fr_auto] items-end gap-4 pt-[10px] px-[clamp(16px,4vw,56px)] pb-2 transition-transform duration-[240ms] ease-snap will-change-transform">
+    <a href="/#top" class="group font-heading font-extrabold text-[clamp(15px,1.6vw,21px)] tracking-[-0.03em] uppercase leading-none">CounterPoint<span class="inline-block text-accent transition-transform duration-300 ease-spring group-hover:-translate-y-[0.18em]">.</span></a>
     <nav class=" hidden md:flex flex-wrap gap-[clamp(10px,2vw,28px)] text-[13px] tracking-[0.08em] uppercase font-semibold">
-      <a href="/#manifiesto">Manifiesto</a>
-      <a href="/#servicios">Servicios</a>
-      <a href="/#trabajo">Trabajo</a>
-      <a href="/#contacto" class="text-accent">Consultar</a>
+      <a href="/#manifiesto" class="relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:origin-right after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-snap hover:after:origin-left hover:after:scale-x-100">Manifiesto</a>
+      <a href="/#servicios" class="relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:origin-right after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-snap hover:after:origin-left hover:after:scale-x-100">Servicios</a>
+      <a href="/#trabajo" class="relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:origin-right after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-snap hover:after:origin-left hover:after:scale-x-100">Trabajo</a>
+      <a href="/#contacto" class="text-accent relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:origin-right after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-snap hover:after:origin-left hover:after:scale-x-100">Consultar</a>
     </nav>
   </header>
 </div>

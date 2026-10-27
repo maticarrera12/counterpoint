@@ -12,6 +12,15 @@
   --font-display: "Anton", "Archivo", system-ui, sans-serif;
 }
 
+/* Motion tokens (Emil Kowalski): the built-in CSS easings are too weak. `static` keeps them
+   available to plain CSS (var(--ease-snap)) even when no utility uses them. */
+@theme static {
+  --ease-snap: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-move: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
 :root {
   --font-heading-weight: 800;
   --ac: var(--color-accent);
@@ -20,7 +29,9 @@
 @layer base {
   * { box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
 
   body {
     margin: 0;
@@ -32,8 +43,10 @@
 
   h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: var(--font-heading-weight); }
 
-  a { color: var(--color-text); text-decoration: none; }
-  a:hover { color: var(--ac); }
+  a { color: var(--color-text); text-decoration: none; transition: color 150ms ease; }
+  @media (hover: hover) and (pointer: fine) {
+    a:hover { color: var(--ac); }
+  }
 
   .text-muted { color: color-mix(in srgb, var(--color-text) 55%, transparent); }
 
@@ -46,9 +59,43 @@
     cursor: pointer; text-decoration: none;
     font-family: var(--font-heading); font-weight: var(--font-heading-weight);
   }
-  .btn-primary { background: var(--color-accent); color: var(--color-bg); transition: background 0.5s ease; }
-  .btn-primary:hover { background: var(--color-text); color: var(--color-bg); }
-  .btn-primary:active { background: var(--ac); }
+  .btn {
+    transition: transform 160ms var(--ease-snap), color 200ms ease;
+  }
+  .btn:active:not(:disabled) { transform: scale(0.97); }
+
+  /* Primary button: the dark fill wipes up from the bottom edge instead of a flat colour swap. */
+  .btn-primary {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: var(--color-accent);
+    color: var(--color-bg);
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--color-text);
+    transform: scaleY(0);
+    transform-origin: 50% 100%;
+    transition: transform 320ms var(--ease-snap);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover:not(:disabled)::before { transform: scaleY(1); }
+    .btn-primary:hover { color: var(--color-bg); }
+  }
+  .btn-primary:focus-visible::before { transform: scaleY(1); }
+
+  /* Underline that slides in from the left and leaves to the right. */
+  .link-u {
+    background: linear-gradient(currentColor, currentColor) 100% 100% / 0 1px no-repeat;
+    transition: background-size 320ms var(--ease-snap), color 150ms ease;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .link-u:hover { background-position: 0 100%; background-size: 100% 1px; }
+  }
 
   .cta-sweep {
     position: relative;
@@ -120,7 +167,7 @@
 
   /* Section title reveal: each visual line is one unit, masked, that rises a short distance
      with a slight drift to the right. --rv-in / --rv-out are per-line delays set by
-     reveal-titles.ts; the exit is the time-reverse of the entry. */
+     reveal-titles.ts; the exit is the time-reverse of the entry but quicker (ease-out, never ease-in). */
   .rv-line {
     display: block;
     overflow: hidden;
@@ -132,11 +179,11 @@
     vertical-align: top;
     white-space: nowrap;
     transform: translate3d(-0.45em, 125%, 0);
-    transition: transform 0.6s cubic-bezier(0.64, 0, 0.78, 0) var(--rv-out, 0ms);
+    transition: transform 0.35s var(--ease-snap) var(--rv-out, 0ms);
   }
   .rv-in .rv-line-i {
     transform: none;
-    transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) var(--rv-in, 0ms);
+    transition: transform 0.8s var(--ease-snap) var(--rv-in, 0ms);
   }
 
   /* Process steps: the text follows its title with a soft fade-up; the exit is quicker. */
@@ -144,15 +191,15 @@
     opacity: 0;
     transform: translate3d(0, 0.8em, 0);
     transition:
-      opacity 0.4s cubic-bezier(0.64, 0, 0.78, 0),
-      transform 0.4s cubic-bezier(0.64, 0, 0.78, 0);
+      opacity 0.25s var(--ease-snap),
+      transform 0.25s var(--ease-snap);
   }
   .rv-in .st-text {
     opacity: 1;
     transform: none;
     transition:
-      opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1) 180ms,
-      transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) 180ms;
+      opacity 0.7s var(--ease-snap) 160ms,
+      transform 0.7s var(--ease-snap) 160ms;
   }
 
   /* Impact reveal: each figure and caption enters differently. Hidden states only apply once
@@ -165,19 +212,23 @@
   }
   .imp-ready [data-imp] {
     transition-property: transform, opacity, clip-path;
-    transition-duration: 0.5s;
-    transition-timing-function: cubic-bezier(0.64, 0, 0.78, 0);
+    transition-duration: 0.3s;
+    transition-timing-function: var(--ease-snap);
   }
   .imp-ready .imp-in [data-imp] {
     opacity: 1;
     transform: none;
-    transition-duration: 1s;
-    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    transition-duration: 0.8s;
+    transition-timing-function: var(--ease-snap);
     transition-delay: var(--d, 0ms);
+  }
+  .imp-ready .imp-in [data-imp="pop"] {
+    transition-duration: 0.7s;
+    transition-timing-function: var(--ease-spring);
   }
   .imp-ready [data-imp="rise"] { transform: translate3d(0, 115%, 0); }
   .imp-ready [data-imp="drop"] { transform: translate3d(0, -115%, 0); }
-  .imp-ready [data-imp="pop"] { opacity: 0; transform: rotate(-90deg) scale(0.4); }
+  .imp-ready [data-imp="pop"] { opacity: 0; transform: rotate(-90deg) scale(0.5); }
   .imp-ready [data-imp="from-right"] { opacity: 0; transform: translate3d(1.5em, 0, 0); }
   .imp-ready [data-imp="from-left"] { opacity: 0; transform: translate3d(-1.5em, 0, 0); }
   .imp-ready [data-imp="lift"] { opacity: 0; transform: translate3d(0, 0.9em, 0); }
@@ -189,22 +240,6 @@
   }
   .imp-ready .imp-in [data-imp="wipe"] {
     clip-path: inset(-0.15em -0.05em -0.15em -0.05em);
-  }
-
-  /* Work cases: a calm fade with a small rise, one cell after another (--d set by reveal-work.ts). */
-  .wk-ready [data-wk] {
-    opacity: 0;
-    transform: translate3d(0, 1.75rem, 0);
-    transition:
-      opacity 0.4s ease,
-      transform 0.4s ease;
-  }
-  .wk-ready .wk-in [data-wk] {
-    opacity: 1;
-    transform: none;
-    transition:
-      opacity 1s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0ms),
-      transform 1.1s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0ms);
   }
 
   /* Section grow effect: desktop only. On mobile the sections stay flat and square. */
@@ -256,4 +291,107 @@
   .paper-content em { font-style: italic; }
   .paper-content a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
   .paper-content a:hover { color: var(--color-accent); }
+}
+
+/* ------------------------------------------------------------------------------------------
+   Generic scroll reveal. reveal.ts adds .is-in once the element reaches the trigger line.
+   The hidden state exists only when JS has flagged <html class="js"> and motion is allowed.
+   Entrances are keyframes with no `to` frame: they settle on the element's own styles, so
+   hover transforms, opacity utilities and transitions keep working after the reveal.
+   ------------------------------------------------------------------------------------------ */
+@keyframes rv-up { from { opacity: 0; transform: translate3d(0, 24px, 0); } }
+@keyframes rv-fade { from { opacity: 0; } }
+@keyframes rv-scale { from { opacity: 0; transform: scale(0.94); } }
+@keyframes rv-left { from { opacity: 0; transform: translate3d(-32px, 0, 0); } }
+@keyframes rv-right { from { opacity: 0; transform: translate3d(32px, 0, 0); } }
+@keyframes rv-pop { from { opacity: 0; transform: scale(0.5) rotate(-25deg); } }
+@keyframes rv-line { from { transform: scaleX(0); } }
+@keyframes rv-clip { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes rv-zoom { from { transform: scale(1.18); } }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Above-the-fold page intros (inner pages): same lift, driven by CSS so it starts at first paint. */
+  .intro { animation: rv-up 700ms var(--ease-snap) var(--rd, 0ms) backwards; }
+
+  .js [data-reveal]:not(.is-in) { opacity: 0; }
+  .js [data-reveal="line"]:not(.is-in) { opacity: 1; transform: scaleX(0); transform-origin: 0 50%; }
+  .js [data-reveal="clip"]:not(.is-in) { opacity: 1; clip-path: inset(0 0 100% 0); }
+
+  .js [data-reveal].is-in {
+    animation-duration: 700ms;
+    animation-timing-function: var(--ease-snap);
+    animation-delay: var(--rd, 0ms);
+    animation-fill-mode: backwards;
+  }
+  .js [data-reveal="up"].is-in { animation-name: rv-up; }
+  .js [data-reveal="fade"].is-in { animation-name: rv-fade; animation-duration: 600ms; }
+  .js [data-reveal="scale"].is-in { animation-name: rv-scale; }
+  .js [data-reveal="left"].is-in { animation-name: rv-left; animation-duration: 800ms; }
+  .js [data-reveal="right"].is-in { animation-name: rv-right; animation-duration: 800ms; }
+  .js [data-reveal="pop"].is-in { animation-name: rv-pop; animation-duration: 650ms; animation-timing-function: var(--ease-spring); }
+  .js [data-reveal="line"].is-in { animation-name: rv-line; animation-duration: 900ms; animation-timing-function: var(--ease-move); }
+  .js [data-reveal="clip"].is-in { animation-name: rv-clip; animation-duration: 900ms; animation-timing-function: var(--ease-move); }
+  .js [data-reveal="clip"]:not(.is-in) img { transform: scale(1.18); }
+  .js [data-reveal="clip"].is-in img { animation: rv-zoom 1.3s var(--ease-snap) var(--rd, 0ms) backwards; }
+}
+
+/* Custom select list: origin-aware (drops from the trigger), quick in, quicker out. */
+.dd-list {
+  transform-origin: 50% 0;
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 160ms var(--ease-snap),
+    transform 160ms var(--ease-snap),
+    display 160ms allow-discrete;
+}
+.dd-list[hidden] {
+  display: none;
+  opacity: 0;
+  transform: translate3d(0, -6px, 0) scale(0.97);
+  transition-duration: 110ms;
+}
+@starting-style {
+  .dd-list { opacity: 0; transform: translate3d(0, -6px, 0) scale(0.97); }
+}
+
+/* Contact feedback boxes arrive with the same lift as every other entrance. */
+#contact-success:not([hidden]),
+#contact-error:not([hidden]) {
+  animation: rv-up 520ms var(--ease-snap) backwards;
+}
+
+/* Scroll progress: a thin accent line scrubbed by the root scroller (progressive enhancement). */
+.scroll-progress {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 1;
+  height: 5px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+@keyframes cp-progress { to { transform: scaleX(1); } }
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-progress {
+      animation: cp-progress linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+
+/* Page transitions between documents (MPA view transitions). The header keeps its own layer so
+   it stays put while the page content cross-fades with a small lift. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+
+  #site-chrome { view-transition-name: site-chrome; }
+  ::view-transition-group(site-chrome) { animation-duration: 0s; }
+
+  ::view-transition-old(root) { animation: 160ms var(--ease-snap) both vt-out; }
+  ::view-transition-new(root) { animation: 360ms var(--ease-snap) 60ms both vt-in; }
+  @keyframes vt-out { to { opacity: 0; transform: translate3d(0, -8px, 0); } }
+  @keyframes vt-in { from { opacity: 0; transform: translate3d(0, 14px, 0); } }
 }
