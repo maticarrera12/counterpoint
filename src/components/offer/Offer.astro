@@ -23,17 +23,17 @@ const items = [
 
 <section id="servicios" class="bg-text text-bg font-body px-[clamp(16px,4vw,56px)] pt-[clamp(40px,6vw,80px)] md:pt-0">
   <div class="grid grid-cols-1 md:grid-cols-[auto_1fr_1fr_1fr] border-b border-bg/15">
-    <h2 class="m-0 py-4 md:pb-6 md:pt-[calc(clamp(40px,6vw,80px)+1.5rem)] md:pr-[clamp(12px,2vw,28px)] font-stretch-extra-condensed text-[clamp(18px,1.9vw,28px)] tracking-[0.1em] uppercase font-semibold text-bg/70 md:[writing-mode:vertical-rl] md:rotate-180 md:text-center">Qué hacemos</h2>
-    {items.map((item) => (
+    <h2 data-reveal="fade" class="m-0 py-4 md:pb-6 md:pt-[calc(clamp(40px,6vw,80px)+1.5rem)] md:pr-[clamp(12px,2vw,28px)] font-stretch-extra-condensed text-[clamp(18px,1.9vw,28px)] tracking-[0.1em] uppercase font-semibold text-bg/70 md:[writing-mode:vertical-rl] md:rotate-180 md:text-center">Qué hacemos</h2>
+    {items.map((item, i) => (
       <a
         href={item.href}
-        class="group relative isolate overflow-hidden flex flex-col gap-3 border-t border-bg/15 md:border-t-0 md:border-l py-5 md:pb-6 md:pt-[calc(clamp(40px,6vw,80px)+1.5rem)] md:px-[clamp(14px,2vw,28px)] text-bg hover:text-text transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+        class="group relative isolate overflow-hidden flex flex-col gap-3 border-t border-bg/15 md:border-t-0 md:border-l py-5 md:pb-6 md:pt-[calc(clamp(40px,6vw,80px)+1.5rem)] md:px-[clamp(14px,2vw,28px)] text-bg hover:text-text transition-[color,scale] duration-[400ms] ease-snap active:scale-[0.985]"
       >
-        <span aria-hidden="true" class="absolute inset-0 -z-10 bg-bg origin-bottom scale-y-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-y-100"></span>
-        <span class="font-heading font-extrabold text-accent text-[clamp(22px,2.4vw,34px)] leading-none tracking-[-0.03em]">{item.num}</span>
-        <h3 class="m-0 font-stretch-extra-condensed text-[clamp(22px,2.4vw,36px)] leading-[1.02] tracking-[-0.01em] uppercase">{item.title}</h3>
-        <p class="m-0 text-[14px] leading-[1.5] text-current opacity-60 max-w-[34ch]">{item.description}</p>
-        <span class="mt-auto pt-2 text-[18px] leading-none transition-all duration-500 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-accent" aria-hidden="true">↗</span>
+        <span aria-hidden="true" class="absolute inset-0 -z-10 bg-bg origin-bottom scale-y-0 transition-transform duration-[400ms] ease-snap group-hover:scale-y-100"></span>
+        <span data-reveal="pop" style={`--rd:${i * 110}ms`} class="self-start font-heading font-extrabold text-accent text-[clamp(22px,2.4vw,34px)] leading-none tracking-[-0.03em]">{item.num}</span>
+        <h3 data-reveal="up" style={`--rd:${i * 110 + 70}ms`} class="m-0 font-stretch-extra-condensed text-[clamp(22px,2.4vw,36px)] leading-[1.02] tracking-[-0.01em] uppercase">{item.title}</h3>
+        <p data-reveal="up" style={`--rd:${i * 110 + 140}ms`} class="m-0 text-[14px] leading-[1.5] text-current opacity-60 max-w-[34ch]">{item.description}</p>
+        <span class="mt-auto pt-2 text-[18px] leading-none transition-[translate,color] duration-300 ease-snap group-hover:translate-x-1.5 group-hover:-translate-y-1.5 group-hover:text-accent" aria-hidden="true">↗</span>
       </a>
     ))}
   </div>

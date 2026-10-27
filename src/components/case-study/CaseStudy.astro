@@ -8,21 +8,21 @@ const steps = [
 
 <section id="estudio-de-caso" class="bg-text text-bg font-body px-[clamp(16px,4vw,56px)] py-[clamp(40px,7vw,100px)]">
   <div class="flex flex-col md:flex-row md:items-stretch bg-bg text-text">
-    <div class="shrink-0 bg-accent text-bg flex md:flex-col justify-between items-center md:items-start gap-4 p-[clamp(16px,2vw,28px)] md:w-[clamp(130px,14vw,210px)]">
+    <div data-reveal="left" class="shrink-0 bg-accent text-bg flex md:flex-col justify-between items-center md:items-start gap-4 p-[clamp(16px,2vw,28px)] md:w-[clamp(130px,14vw,210px)]">
       <h2 class="m-0 font-display font-normal text-[clamp(32px,4.2vw,68px)] leading-[0.95] uppercase">Case<br />study</h2>
       <span class="text-[clamp(28px,3vw,44px)] leading-none" aria-hidden="true">↗</span>
     </div>
 
     <div class="md:w-[clamp(240px,30vw,440px)] shrink-0 p-[clamp(16px,2vw,28px)] md:border-r md:border-text/20">
-      <img src="/og.png" alt="Sitio de CounterPoint" width="1200" height="630" loading="lazy" class="block w-full h-auto" />
+      <div data-reveal="clip" style="--rd:120ms" class="overflow-hidden"><img src="/og.png" alt="Sitio de CounterPoint" width="1200" height="630" loading="lazy" class="block w-full h-auto" /></div>
     </div>
 
     <div class="flex-1 p-[clamp(16px,2.4vw,36px)] flex flex-col gap-[clamp(16px,2vw,28px)]">
-      <h3 class="m-0 font-display font-normal text-[clamp(36px,5vw,80px)] leading-[0.9] uppercase">CounterPoint</h3>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-[clamp(16px,2vw,28px)]">
+      <h3 data-reveal="up" style="--rd:200ms" class="m-0 font-display font-normal text-[clamp(36px,5vw,80px)] leading-[0.9] uppercase">CounterPoint</h3>
+      <div data-reveal-stagger="120" class="grid grid-cols-1 md:grid-cols-3 gap-[clamp(16px,2vw,28px)]">
         {steps.map((s) => (
-          <div class="flex flex-col gap-2">
-            <span class="grid place-items-center size-10 rounded-full bg-accent text-bg text-[13px] font-heading font-extrabold">{s.num}</span>
+          <div data-reveal="up" class="flex flex-col gap-2">
+            <span data-reveal="pop" class="grid place-items-center size-10 rounded-full bg-accent text-bg text-[13px] font-heading font-extrabold">{s.num}</span>
             <h4 class="m-0 mt-1 text-[13px] tracking-[0.08em] uppercase font-heading font-extrabold">{s.title}</h4>
             <p class="m-0 text-[14px] leading-[1.5] text-text/70">{s.text}</p>
           </div>
@@ -30,8 +30,8 @@ const steps = [
       </div>
     </div>
 
-    <a href="/perspectivas" class="shrink-0 bg-accent text-bg flex items-center justify-between md:justify-center gap-3 px-5 py-4 md:px-0 md:py-6 md:w-[clamp(56px,6vw,84px)] font-display text-[clamp(16px,1.6vw,24px)] tracking-[0.1em] uppercase md:[writing-mode:vertical-rl] md:rotate-180 transition-colors hover:bg-text">
-      Ver proyecto <span aria-hidden="true" class="md:rotate-180">↗</span>
-    </a>
+    <div class="shrink-0 bg-text text-bg/60 flex items-center justify-between md:justify-center gap-3 px-5 py-4 md:px-0 md:py-6 md:w-[clamp(56px,6vw,84px)] font-display text-[clamp(16px,1.6vw,24px)] tracking-[0.1em] uppercase md:[writing-mode:vertical-rl] md:rotate-180">
+      <span class="line-through decoration-accent decoration-2">En construcción</span>
+    </div>
   </div>
 </section>
