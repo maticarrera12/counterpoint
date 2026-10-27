@@ -26,9 +26,9 @@ const pad = (n: number) => String(n).padStart(2, '0');
   <h2 class="m-0 text-[clamp(30px,5vw,78px)] leading-[0.94] tracking-[-0.04em] max-w-[18ch] uppercase">De la idea a una web bien resuelta.</h2>
   <p class="text-muted mt-3 mb-[clamp(24px,5vw,60px)] text-[clamp(15px,1.4vw,19px)] leading-[1.5] max-w-[56ch]">Cada proyecto tiene sus particularidades, pero trabajamos con un proceso claro para tomar decisiones y avanzar con criterio.</p>
 
-  <ol class="m-0 p-0 list-none grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-divider">
+  <ol data-reveal-stagger="110" class="m-0 p-0 list-none grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-divider">
     {steps.map((step, i) => (
-      <li class="py-[clamp(16px,2.4vw,28px)] border-b border-divider lg:border-b-0 lg:pr-[clamp(12px,2vw,28px)]">
+      <li data-reveal="up" class="py-[clamp(16px,2.4vw,28px)] border-b border-divider lg:border-b-0 lg:pr-[clamp(12px,2vw,28px)]">
         <div class="text-accent font-heading font-extrabold text-[13px] tracking-[0.08em] uppercase">{pad(i + 1)}</div>
         <h3 class="m-0 mt-2 text-[clamp(19px,2vw,26px)] leading-[1.1] tracking-[-0.02em]">{step.title}</h3>
         <p class="text-muted mt-3 mb-0 text-[clamp(14px,1.2vw,16px)] leading-[1.5] max-w-[34ch]">{step.body}</p>

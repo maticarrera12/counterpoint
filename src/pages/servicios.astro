@@ -47,11 +47,11 @@ const services = [
   <Header />
   <div class="bg-bg text-text font-body overflow-x-hidden relative">
     <section class="pt-[clamp(32px,6vw,72px)] px-[clamp(16px,4vw,56px)] pb-[clamp(32px,5vw,64px)]">
-      <a href="/" class="text-[13px] tracking-[0.08em] uppercase font-semibold text-muted hover:text-accent transition-colors duration-300">← Volver al inicio</a>
+      <a href="/" class="text-[13px] tracking-[0.08em] uppercase font-semibold text-muted hover:text-accent transition-colors duration-200">← Volver al inicio</a>
 
-      <div class="text-[13px] tracking-[0.08em] uppercase font-semibold mt-[clamp(20px,4vw,40px)]">Servicios</div>
-      <h1 class="m-0 mt-2 text-[clamp(34px,6vw,96px)] leading-[0.92] tracking-[-0.04em] uppercase max-w-[16ch]">Tres formas de trabajar. Un mismo criterio.</h1>
-      <p class="text-muted mt-4 mb-0 text-[clamp(15px,1.4vw,19px)] leading-[1.5] max-w-[52ch]">Landing pages, sitios institucionales y rediseños: cada formato con diseño y desarrollo propios, de punta a punta.</p>
+      <div class="intro text-[13px] tracking-[0.08em] uppercase font-semibold mt-[clamp(20px,4vw,40px)]">Servicios</div>
+      <h1 style="--rd:80ms" class="intro m-0 mt-2 text-[clamp(34px,6vw,96px)] leading-[0.92] tracking-[-0.04em] uppercase max-w-[16ch]">Tres formas de trabajar. Un mismo criterio.</h1>
+      <p style="--rd:180ms" class="intro text-muted mt-4 mb-0 text-[clamp(15px,1.4vw,19px)] leading-[1.5] max-w-[52ch]">Landing pages, sitios institucionales y rediseños: cada formato con diseño y desarrollo propios, de punta a punta.</p>
     </section>
 
     {services.map((service) => <ServiceDetail {...service} />)}
@@ -59,14 +59,14 @@ const services = [
     <ProcessSteps />
 
     <section class="border-t-2 border-divider py-[clamp(32px,5vw,64px)] px-[clamp(16px,4vw,56px)]">
-      <p class="m-0 text-[clamp(15px,1.3vw,18px)] leading-[1.6] max-w-[65ch]">Cada proyecto se define según sus objetivos y necesidades. El alcance, los entregables, los plazos y la inversión se establecen antes de comenzar. Las funcionalidades especiales y los servicios externos se evalúan y cotizan por separado.</p>
+      <p data-reveal="up" class="m-0 text-[clamp(15px,1.3vw,18px)] leading-[1.6] max-w-[65ch]">Cada proyecto se define según sus objetivos y necesidades. El alcance, los entregables, los plazos y la inversión se establecen antes de comenzar. Las funcionalidades especiales y los servicios externos se evalúan y cotizan por separado.</p>
     </section>
 
     <section data-reveal-title class="bg-accent text-bg pt-[clamp(48px,9vw,130px)] px-[clamp(16px,4vw,56px)] pb-[clamp(48px,9vw,130px)]">
       <div class="grid grid-cols-12 gap-y-[clamp(20px,4vw,44px)] gap-x-[clamp(8px,1.6vw,22px)]">
         <h2 class="col-[1/13] md:col-[1/12] m-0 text-[clamp(38px,8.4vw,136px)] leading-[0.88] tracking-[-0.045em]">El próximo paso nunca debería ser automático.</h2>
-        <p class="col-[1/13] md:col-[1/6] m-0 text-[clamp(15px,1.4vw,20px)] leading-[1.4]">Contanos qué necesitás y vemos juntos cuál es el mejor formato.</p>
-        <div class="col-[1/13] md:col-[9/13] flex items-end md:justify-end">
+        <p data-reveal="up" style="--rd:250ms" class="col-[1/13] md:col-[1/6] m-0 text-[clamp(15px,1.4vw,20px)] leading-[1.4]">Contanos qué necesitás y vemos juntos cuál es el mejor formato.</p>
+        <div data-reveal="up" style="--rd:350ms" class="col-[1/13] md:col-[9/13] flex items-end md:justify-end">
           <a href="/#contacto" class="cta-sweep font-heading font-extrabold text-[clamp(15px,1.6vw,22px)] tracking-[-0.01em] text-bg"><span class="cta-sweep-label" data-text="Empezar la conversación →">Empezar la conversación →</span><span class="cta-sweep-underline"></span></a>
         </div>
       </div>
