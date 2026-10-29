@@ -1,0 +1,11 @@
+---
+// The "C." mark. `dark` is the black version for light surfaces, `light` is the white one for dark surfaces.
+interface Props {
+  mark?: 'dark' | 'light';
+  class?: string;
+}
+
+const { mark = 'dark', class: className = '' } = Astro.props;
+---
+
+<img src={`/img/logo-c-${mark}.png`} alt="" width="407" height="440" aria-hidden="true" class:list={['block w-auto select-none', className]} />
