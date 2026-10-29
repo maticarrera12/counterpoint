@@ -1,29 +1,40 @@
 ---
 import ImgSlot from '../ImgSlot.astro';
 import AllWork from './AllWork.astro';
+import { projects, layouts } from '../../lib/projects';
 
-const projects = [
-  { num: '01', name: 'Consultora Nexo', category: 'Identidad y sitio web', src: '/img/nexo.webp', alt: 'Sitio de Consultora Nexo', width: 3024, height: 1964, layout: 'md:col-[1/8]' },
-  { num: '02', name: 'Estudio jurídico Lasalle', category: 'Primer sitio institucional', src: '/img/lasalle.webp', alt: 'Sitio del Estudio jurídico Lasalle', width: 1600, height: 1004, layout: 'md:col-[9/13] md:mt-[clamp(0px,14vw,220px)]' },
-];
+// The rest live in the "Ver todos los proyectos" list.
+const FEATURED = 4;
 ---
 
 <section class="pb-[clamp(72px,9vw,140px)]">
   <div class="mx-auto max-w-[1440px] px-[clamp(16px,4vw,56px)]">
     <div class="grid grid-cols-1 gap-x-[clamp(12px,1.6vw,24px)] gap-y-12 md:grid-cols-12">
-      {projects.map((p, i) => (
-        <article class:list={['group flex flex-col gap-4', p.layout]}>
-          <div data-reveal="clip" style={`--rd:${i * 140}ms`} class="relative aspect-[16/10] overflow-hidden border-[1.5px] border-text bg-white [&_img]:transition-[scale] [&_img]:duration-700 [&_img]:ease-snap group-hover:[&_img]:scale-[1.04]">
+      {projects.slice(0, FEATURED).map((p, i) => {
+        const Media = p.href ? 'a' : 'div';
+        return (
+        <article class:list={['group flex flex-col gap-4', layouts[i % layouts.length]]}>
+          <Media
+            href={p.href}
+            target={p.href ? '_blank' : undefined}
+            rel={p.href ? 'noopener noreferrer' : undefined}
+            aria-label={p.href ? `Visitar ${p.name}` : undefined}
+            data-reveal="clip"
+            data-view={p.href ? 'Ver ↗' : 'Pronto'}
+            style={`--rd:${(i % 2) * 140}ms`}
+            class="relative block [@media(hover:hover)]:data-[view]:cursor-none aspect-[16/10] overflow-hidden border-[1.5px] border-text bg-white [&_img]:transition-[scale] [&_img]:duration-700 [&_img]:ease-snap group-hover:[&_img]:scale-[1.04]"
+          >
             <ImgSlot src={p.src} alt={p.alt} width={p.width} height={p.height} fit="cover" />
-          </div>
-          <div data-reveal="up" style={`--rd:${i * 140 + 200}ms`} class="grid grid-cols-[auto_1fr] items-baseline gap-x-5 gap-y-1 border-t-[1.5px] border-text pt-3">
-            <span class="text-[13px] font-bold tracking-[0.1em] text-accent">{p.num}/</span>
+          </Media>
+          <div data-reveal="up" style={`--rd:${(i % 2) * 140 + 200}ms`} class="grid grid-cols-[auto_1fr] items-baseline gap-x-5 gap-y-1 border-t-[1.5px] border-text pt-3">
+            <span class="text-[13px] font-bold tracking-[0.1em] text-accent">{String(i + 1).padStart(2, '0')}/</span>
             <h3 class="m-0 font-stretch-expanded text-[clamp(18px,1.6vw,24px)] font-extrabold tracking-[-0.02em] uppercase transition-colors duration-200 group-hover:text-accent">{p.name}</h3>
             <span></span>
             <span class="text-[13px] tracking-[0.16em] uppercase font-semibold text-muted">{p.category}</span>
           </div>
         </article>
-      ))}
+        );
+      })}
     </div>
 
     <AllWork />
@@ -38,3 +49,41 @@ const projects = [
     </a>
   </div>
 </section>
+
+<div data-view-cursor aria-hidden="true" class="pointer-events-none fixed top-0 left-0 z-50 hidden size-24 [@media(hover:hover)]:block">
+  <span class="grid size-full scale-0 place-items-center rounded-full bg-accent text-[13px] font-medium tracking-[0.12em] text-text uppercase transition-[scale] duration-300 ease-snap motion-reduce:transition-none"></span>
+</div>
+
+<script>
+  const cursor = document.querySelector<HTMLElement>('[data-view-cursor]');
+  const targets = document.querySelectorAll<HTMLElement>('[data-view]');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (cursor && targets.length && window.matchMedia('(hover: hover)').matches) {
+    const badge = cursor.firstElementChild as HTMLElement;
+    const HALF = cursor.offsetWidth / 2;
+    let tx = 0, ty = 0, x = 0, y = 0, raf = 0, active = false;
+
+    const frame = () => {
+      // Lerp so the badge trails the pointer slightly; reduced motion snaps to it.
+      x += (tx - x) * (reduceMotion ? 1 : 0.22);
+      y += (ty - y) * (reduceMotion ? 1 : 0.22);
+      cursor.style.transform = `translate3d(${x - HALF}px,${y - HALF}px,0)`;
+      raf = active || Math.abs(tx - x) > 0.5 || Math.abs(ty - y) > 0.5 ? requestAnimationFrame(frame) : 0;
+    };
+    const kick = () => { if (!raf) raf = requestAnimationFrame(frame); };
+
+    targets.forEach((el) => {
+      el.addEventListener('pointerenter', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        tx = x = e.clientX; ty = y = e.clientY;
+        active = true;
+        badge.textContent = el.dataset.view ?? '';
+        badge.style.scale = '1';
+        kick();
+      });
+      el.addEventListener('pointermove', (e) => { tx = e.clientX; ty = e.clientY; kick(); });
+      el.addEventListener('pointerleave', () => { active = false; badge.style.scale = ''; });
+    });
+  }
+</script>
