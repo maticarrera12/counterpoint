@@ -10,6 +10,7 @@
   --font-heading: "Archivo", system-ui, sans-serif;
   --font-body: "Archivo", system-ui, sans-serif;
   --font-display: "Anton", "Archivo", system-ui, sans-serif;
+  --font-logo: "Abril Fatface", Georgia, serif;
 }
 
 /* Motion tokens (Emil Kowalski): the built-in CSS easings are too weak. `static` keeps them
@@ -39,6 +40,8 @@
     background: var(--color-bg);
     color: var(--color-text);
     font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.5;
   }
 
   h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: var(--font-heading-weight); }
@@ -48,7 +51,7 @@
     a:hover { color: var(--ac); }
   }
 
-  .text-muted { color: color-mix(in srgb, var(--color-text) 55%, transparent); }
+  .text-muted { color: color-mix(in srgb, var(--color-text) 72%, transparent); }
 
   :focus { outline: none; }
   :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
@@ -157,7 +160,7 @@
     padding: 10px;
   }
   .img-slot span {
-    font-size: 12px;
+    font-size: 13px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     text-align: center;
@@ -394,4 +397,24 @@
   ::view-transition-new(root) { animation: 360ms var(--ease-snap) 60ms both vt-in; }
   @keyframes vt-out { to { opacity: 0; transform: translate3d(0, -8px, 0); } }
   @keyframes vt-in { from { opacity: 0; transform: translate3d(0, 14px, 0); } }
+}
+
+/* Service titles: the orange highlighter is drawn left to right when the row enters. */
+.hl-sweep {
+  padding-right: 0.2em;
+  background: linear-gradient(transparent 52%, var(--color-accent) 52% 92%, transparent 92%) 0 0 / 100% 100% no-repeat;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hl-sweep { transition: background-size 700ms var(--ease-move) 250ms; }
+  .js [data-reveal]:not(.is-in) .hl-sweep { background-size: 0% 100%; }
+}
+
+/* Sunburst: the rays turn a few degrees as the block crosses the screen (scroll-driven, transform-only). */
+.sb-rays { transform-box: view-box; transform-origin: 50% 50%; }
+@keyframes sb-turn { from { transform: rotate(-8deg); } to { transform: rotate(8deg); } }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .sb-scope { view-timeline-name: --sb; view-timeline-axis: block; }
+    .sb-scope .sb-rays { animation: sb-turn linear both; animation-timeline: --sb; animation-range: entry 0% exit 100%; }
+  }
 }

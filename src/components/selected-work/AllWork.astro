@@ -1,0 +1,127 @@
+---
+const projects = [
+  { name: 'CounterPoint', format: 'Institucional', year: '2026', href: '#estudio-de-caso' },
+  { name: 'Estudio jurídico Lasalle', format: 'Institucional', year: '2026' },
+  { name: 'Consultora Nexo', format: 'Institucional', year: '2025' },
+];
+
+// The full list only earns its place once there is more to show than the featured cards above.
+const showAll = projects.length > 3;
+
+const formats = ['Todos', 'Landing page', 'Institucional', 'Rediseño'];
+---
+
+{showAll && (
+  <>
+<div data-all-work-link class="mt-[clamp(40px,5vw,72px)] flex items-center justify-between gap-4 border-t-[1.5px] border-text pt-4">
+  <a href="#todos-los-trabajos" data-open-all aria-expanded="false" aria-controls="todos-los-trabajos" class="group inline-flex items-center gap-3 text-[13px] tracking-[0.16em] uppercase font-extrabold text-text transition-[color,scale] duration-200 ease-snap active:scale-[0.97]">
+    Ver todos los proyectos <span aria-hidden="true" class="transition-transform duration-300 ease-snap group-hover:translate-y-1">↓</span>
+  </a>
+  <span class="text-[13px] tracking-[0.16em] uppercase font-bold text-muted">{projects.length} proyectos</span>
+</div>
+
+<section id="todos-los-trabajos" data-all-work aria-labelledby="all-work-title" class="mt-[clamp(40px,5vw,72px)]">
+  <div class="flex items-center justify-between gap-6 border-t-[1.5px] border-text pt-[clamp(20px,2.4vw,32px)]">
+    <h2 id="all-work-title" class="m-0 font-stretch-expanded text-[clamp(26px,4.6vw,76px)] leading-none tracking-[-0.04em] uppercase"><span class="font-light">Todos </span><span class="font-black">los trabajos</span></h2>
+    <div class="flex items-center gap-[clamp(12px,2vw,28px)]">
+      <span data-all-count class="hidden text-[13px] tracking-[0.16em] uppercase font-bold text-muted sm:inline">{projects.length} proyectos</span>
+      <button type="button" data-close-all aria-label="Cerrar la lista de trabajos" class="grid size-[clamp(44px,4.4vw,64px)] place-items-center border-[1.5px] border-text text-[clamp(20px,2vw,28px)] leading-none transition-[background-color,color,scale] duration-200 ease-snap hover:bg-text hover:text-bg active:scale-[0.95]">—</button>
+    </div>
+  </div>
+
+  <div role="group" aria-label="Filtrar por formato" class="mt-[clamp(20px,2.4vw,32px)] flex flex-wrap gap-3">
+    {formats.map((f, i) => (
+      <button
+        type="button"
+        data-filter={f}
+        aria-pressed={i === 0 ? 'true' : 'false'}
+        class="border-[1.5px] border-text px-[clamp(14px,1.6vw,24px)] py-3 text-[13px] tracking-[0.16em] uppercase font-extrabold transition-[background-color,color,scale] duration-200 ease-snap hover:bg-text hover:text-bg active:scale-[0.97] aria-pressed:bg-text aria-pressed:text-bg"
+      >{f}</button>
+    ))}
+  </div>
+
+  <div class="mt-[clamp(24px,3vw,40px)] border-t-[1.5px] border-text">
+    <div class="hidden grid-cols-[72px_1fr_220px_100px_40px] border-b border-text/40 py-3 text-[13px] tracking-[0.16em] uppercase font-bold text-muted md:grid" aria-hidden="true">
+      <span>N°</span><span>Cliente</span><span>Formato</span><span>Año</span><span></span>
+    </div>
+    <ol class="m-0 list-none p-0">
+      {projects.map((p, i) => {
+        const Tag = p.href ? 'a' : 'div';
+        return (
+          <li data-row data-format={p.format} class="border-b border-text/40 last:border-b-[1.5px] last:border-text">
+            <Tag
+              href={p.href}
+              class:list={[
+                'group grid grid-cols-[40px_1fr_auto] items-center gap-x-4 py-[clamp(16px,2vw,28px)] text-text md:grid-cols-[72px_1fr_220px_100px_40px]',
+                p.href && 'transition-[background-color,color] duration-200 ease-snap hover:bg-text hover:text-bg',
+              ]}
+            >
+              <span class:list={['text-[13px] font-bold text-accent', p.href && 'transition-transform duration-300 ease-snap group-hover:translate-x-4']}>{String(i + 1).padStart(2, '0')}</span>
+              <span class:list={['font-stretch-expanded text-[clamp(17px,2.2vw,32px)] font-extrabold leading-[1.05] tracking-[-0.02em] uppercase', p.href && 'transition-transform duration-300 ease-snap group-hover:translate-x-4']}>
+                {p.name}
+                <span class="mt-1 block text-[14px] font-normal normal-case tracking-normal text-muted group-hover:text-bg/70 md:hidden">{p.format} · {p.year}</span>
+              </span>
+              <span class="hidden text-[18px] md:block">{p.format}</span>
+              <span class="text-[18px] tabular-nums">{p.year}</span>
+              <span aria-hidden="true" class="hidden justify-self-end text-[22px] leading-none text-accent md:block">{p.href ? '↗' : ''}</span>
+            </Tag>
+          </li>
+        );
+      })}
+    </ol>
+  </div>
+</section>
+  </>
+)}
+
+<script>
+  const panel = document.querySelector<HTMLElement>('[data-all-work]');
+  const linkRow = document.querySelector<HTMLElement>('[data-all-work-link]');
+  const opener = document.querySelector<HTMLAnchorElement>('[data-open-all]');
+  const closer = document.querySelector<HTMLElement>('[data-close-all]');
+
+  if (panel && linkRow && opener && closer) {
+    const rows = Array.from(panel.querySelectorAll<HTMLElement>('[data-row]'));
+    const chips = Array.from(panel.querySelectorAll<HTMLButtonElement>('[data-filter]'));
+    const count = panel.querySelector<HTMLElement>('[data-all-count]');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // With JS the panel starts closed; without it, it simply stays open.
+    panel.dataset.ready = '';
+
+    const setOpen = (open: boolean) => {
+      if (open) panel.dataset.open = '';
+      else delete panel.dataset.open;
+      opener.setAttribute('aria-expanded', String(open));
+      linkRow.hidden = open;
+      (open ? panel : opener).scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: open ? 'start' : 'center' });
+    };
+
+    opener.addEventListener('click', (e) => {
+      e.preventDefault();
+      setOpen(true);
+    });
+    closer.addEventListener('click', () => setOpen(false));
+    if (location.hash === '#todos-los-trabajos') setOpen(true);
+
+    const applyFilter = (value: string) => {
+      let shown = 0;
+      for (const row of rows) {
+        const match = value === 'Todos' || row.dataset.format === value;
+        row.hidden = !match;
+        if (match) shown += 1;
+      }
+      for (const chip of chips) chip.setAttribute('aria-pressed', String(chip.dataset.filter === value));
+      if (count) count.textContent = `${shown} ${shown === 1 ? 'proyecto' : 'proyectos'}`;
+    };
+    chips.forEach((chip) => chip.addEventListener('click', () => applyFilter(chip.dataset.filter ?? 'Todos')));
+  }
+</script>
+
+<style is:global>
+  /* Closed by default once JS has taken over; opening lifts in like every other entrance. */
+  [data-all-work][data-ready]:not([data-open]) { display: none; }
+  @media (prefers-reduced-motion: no-preference) {
+    [data-all-work][data-open] { animation: rv-up 420ms var(--ease-snap) backwards; }
+  }
+</style>

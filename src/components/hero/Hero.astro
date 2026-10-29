@@ -7,37 +7,38 @@ const repeats = 6;
 const sequence = Array.from({ length: repeats }, () => phrases).flat();
 ---
 
-<section id="top" class="relative pt-[clamp(24px,5vw,64px)] px-[clamp(16px,4vw,56px)] pb-0">
-  <div>
-    <div data-hero="1" class="flex flex-col md:flex-row md:justify-between gap-x-[clamp(8px,1.6vw,22px)] gap-y-0">
-      <div class="text-[13px] tracking-[0.08em] uppercase font-semibold ">Vol. 01<br><span class="text-muted hidden md:block">Diseño & Código&nbsp;/ sept. 2026</span></div>
-      <div class="self-end md:self-auto text-[13px] tracking-[0.08em] uppercase font-semibold text-right">Estudio Independiente<br><span class="text-muted">Buenos Aires, Argentina</span></div>
+<section id="top" class="relative overflow-hidden">
+  <div class="absolute inset-x-0 top-0 h-[clamp(90px,10vw,150px)] bg-text"></div>
+  <div class="relative mx-auto grid max-w-[1440px] grid-cols-12 gap-x-[clamp(12px,1.6vw,24px)] px-[clamp(16px,4vw,56px)]">
+    <div data-hero="1" class="col-[1/8] flex h-[clamp(90px,10vw,150px)] items-end justify-between gap-4 pb-4 text-[13px] leading-[1.7] tracking-[0.16em] uppercase font-semibold text-bg">
+      <div class="whitespace-nowrap">Vol. 01<br /><span class="text-bg/60">Diseño &amp; código</span></div>
+      <div class="hidden sm:block whitespace-nowrap text-right">Estudio indep.<br /><span class="text-bg/60">Buenos Aires</span></div>
     </div>
-    <div class="hero-rule h-0.5 bg-divider mt-[clamp(10px,1.6vw,20px)] mb-[clamp(12px,2vw,26px)]"></div>
-  </div>
 
-  <div class="relative grid grid-cols-12 gap-x-[clamp(8px,1.6vw,22px)] gap-y-0 pt-20 md:pt-0">
-    <h1 class="col-[1/12] row-start-1 m-0 text-[clamp(52px,13.2vw,178px)] leading-[0.84] tracking-[-0.045em] uppercase relative z-3 mix-blend-multiply">
-      <span class="hero-line"><span class="hero-line-i whitespace-nowrap" style="--i:0">nada es</span></span>
-      <span class="hero-line"><span class="hero-line-i inline-block" style="--i:1">decorativo</span></span>
-      <span class="hero-line"><span class="hero-line-i" style="--i:2">todo es</span></span>
-      <span class="hero-line"><span class="hero-line-i" style="--i:3">delib<span class="text-accent">erado.</span></span></span>
+    <div class="hero-sun col-[9/13] row-[1/3] flex aspect-[1/1.02] flex-col items-center justify-center gap-[4%] self-start border-[1.5px] border-text bg-accent p-[8%] font-stretch-expanded font-light leading-[0.9] tracking-[-0.02em] text-[clamp(44px,9.4vw,150px)]" aria-hidden="true">
+      <span class="text-text">20</span>
+      <span class="h-0.5 w-[78%] bg-text"></span>
+      <span class="text-white">26</span>
+    </div>
+
+    <h1 class="col-[1/9] row-start-2 m-0 pt-[clamp(32px,6vw,96px)] font-stretch-expanded text-[clamp(28px,6.5vw,104px)] leading-[0.94] tracking-[-0.035em] uppercase">
+      <span class="hero-line"><span class="hero-line-i whitespace-nowrap font-light" style="--i:0">Nada es</span></span>
+      <span class="hero-line"><span class="hero-line-i font-black" style="--i:1">Decorativo</span></span>
+      <span class="hero-line"><span class="hero-line-i font-light" style="--i:2">Todo es</span></span>
+      <span class="hero-line"><span class="hero-line-i font-black" style="--i:3">Delib<span class="text-accent">erado</span></span></span>
     </h1>
-    <div class="hero-fig col-[8/13] row-start-1 self-center mt-[clamp(40px,9vw,120px)] relative z-1">
-      <div class="hero-img relative w-full aspect-square overflow-hidden">
-        <ImgSlot src="/img/tower.webp" alt="Fachada de un edificio en blanco y negro" fit="cover" width={700} height={1109} loading="eager">Conceptual: grilla tipográfica, sombra dura, masa abstracta</ImgSlot>
-      </div>
-      <div data-hero="2" class="text-[14px] tracking-[0.02em] mt-2 flex justify-between gap-3"><span class="text-muted">Fig 01 - Estructura antes que estilo</span><span class="text-accent">↘</span></div>
-    </div>
-  </div>
 
-  <div class="grid pb:16 grid-cols-1 md:grid-cols-12 gap-y-[clamp(16px,3vw,32px)] gap-x-[clamp(8px,1.6vw,22px)] pt-[clamp(20px,4vw,52px)] pb-[clamp(28px,5vw,72px)] items-end">
-    <div data-hero="3" class="flex flex-col gap-2 md:contents">
-      <p class="md:col-[1/6] m-0 text-[clamp(16px,1.5vw,22px)] leading-[1.35] max-w-[34ch]">Diseñamos y desarrollamos sitios web para marcas que quieren verse —y funcionar— a la altura de lo que hacen.</p>
-      <div class="text-muted md:col-[6/9] text-[14px] leading-normal tracking-[0.04em]">Para marcas que no se conforman.</div>
+    <div class="hero-fig col-[9/13] row-start-3 flex flex-col gap-2.5 pt-[clamp(20px,2vw,32px)]">
+      <div class="hero-img relative h-[clamp(180px,26vw,380px)] overflow-hidden grayscale contrast-[1.08]">
+        <ImgSlot src="/img/tower.webp" alt="Fachada de un edificio en blanco y negro" fit="cover" width={700} height={1109} loading="eager">Foto B&amp;N — arquitectura brutalista</ImgSlot>
+      </div>
+      <div data-hero="2" class="flex justify-between gap-3 text-[13px] tracking-[0.04em] text-muted"><span>Fig. 01 — Estructura antes que estilo</span><span class="text-accent">↘</span></div>
     </div>
-    <div data-hero="4" class="md:col-[9/13] flex md:justify-end">
-      <a href="#contacto" class="btn btn-primary w-full md:w-auto text-[13px] tracking-widest uppercase px-5.5 py-3.5"> Contanos tu proyecto →</a>
+
+    <div data-hero="3" class="col-span-full mt-[clamp(32px,5vw,72px)] grid grid-cols-1 items-end gap-6 border-t-[1.5px] border-text pt-6 pb-[clamp(40px,6vw,88px)] md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr]">
+      <p class="m-0 max-w-[30ch] text-[clamp(18px,1.5vw,22px)] leading-[1.35] text-pretty">Diseñamos y desarrollamos sitios web para marcas que quieren verse —y funcionar— a la altura de lo que hacen.</p>
+      <p class="m-0 text-[13px] leading-normal tracking-[0.16em] uppercase font-semibold text-muted">Para marcas que<br />no se conforman.</p>
+      <a href="#contacto" data-hero="4" class="btn btn-primary w-full md:col-span-2 md:w-auto md:min-w-[300px] md:justify-self-end lg:col-auto justify-between gap-7 px-[22px] py-[18px] text-[13px] tracking-[0.16em] uppercase font-extrabold text-white">Contanos tu proyecto <span aria-hidden="true">→</span></a>
     </div>
   </div>
 
@@ -48,7 +49,7 @@ const sequence = Array.from({ length: repeats }, () => phrases).flat();
           {sequence.map((phrase) => (
             <>
               <span class="ticker-item">{phrase}</span>
-              <span class="ticker-item ticker-mark">◆</span>
+              <span class="ticker-item ticker-mark">●</span>
             </>
           ))}
         </div>
@@ -75,6 +76,11 @@ const sequence = Array.from({ length: repeats }, () => phrases).flat();
     [data-hero="3"] { animation: hero-up 800ms var(--ease-snap) 650ms backwards; }
     [data-hero="4"] { animation: hero-up 800ms var(--ease-snap) 780ms backwards; }
     [data-hero="5"] { animation: hero-fade 900ms ease 1000ms backwards; }
+    /* The 20/26 block opens like the photo: wiped up from the bottom, then its figures settle. */
+    .hero-sun { animation: hero-wipe 1000ms var(--ease-move) 250ms backwards; }
+    .hero-sun > span:first-child { animation: hero-up 700ms var(--ease-snap) 750ms backwards; }
+    .hero-sun > span:nth-child(2) { transform-origin: 0 50%; animation: hero-rule 700ms var(--ease-move) 900ms backwards; }
+    .hero-sun > span:last-child { animation: hero-up 700ms var(--ease-snap) 950ms backwards; }
   }
 
   /* The image drifts slowly against the scroll while the hero leaves (scroll-driven, transform-only). */
@@ -100,20 +106,20 @@ const sequence = Array.from({ length: repeats }, () => phrases).flat();
 
   .ticker {
     overflow: hidden;
-    border-top: 2px solid var(--color-divider);
-    padding: 7px 0;
+    border-top: 1.5px solid var(--color-text);
+    border-bottom: 1.5px solid var(--color-text);
+    padding: 14px 0;
     /* Fade both ends so the text doesn't get cut off abruptly. Lives on the static wrapper: on the track it would scroll away. */
-    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
-  }
+      }
 
   .ticker-track {
     display: flex;
     width: max-content;
     animation: cp-ticker 38s linear infinite;
-    font-size: 11px;
-    letter-spacing: 0.18em;
+    font-size: 13px;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .ticker-copy {

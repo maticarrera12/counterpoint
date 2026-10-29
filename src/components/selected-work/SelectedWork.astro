@@ -1,28 +1,40 @@
 ---
 import ImgSlot from '../ImgSlot.astro';
+import AllWork from './AllWork.astro';
 
 const projects = [
-  { num: '01', name: 'Consultora Nexo', category: 'Identidad y sitio web', src: '/img/nexo.webp', alt: 'nexo consulting', width: 3024, height: 1964 },
-  { num: '02', name: 'Estudio jurídico Lasalle', category: 'Primer sitio institucional', src: '/img/lasalle.webp', alt: 'Lasalle', width: 1600, height: 1004 },
-  // Hidden placeholder (third slot). The grid stays at 3 columns so the cards keep their size.
-  // { num: '03', name: 'Proyecto de muestra', category: 'Sitio web', src: '/img/geisel.webp', alt: 'Proyecto de muestra', width: 700, height: 394 },
+  { num: '01', name: 'Consultora Nexo', category: 'Identidad y sitio web', src: '/img/nexo.webp', alt: 'Sitio de Consultora Nexo', width: 3024, height: 1964, layout: 'md:col-[1/8]' },
+  { num: '02', name: 'Estudio jurídico Lasalle', category: 'Primer sitio institucional', src: '/img/lasalle.webp', alt: 'Sitio del Estudio jurídico Lasalle', width: 1600, height: 1004, layout: 'md:col-[9/13] md:mt-[clamp(0px,14vw,220px)]' },
 ];
 ---
 
-<section id="trabajo" class="bg-text text-bg font-body px-[clamp(16px,4vw,56px)] pb-[clamp(40px,7vw,100px)]">
-  <div class="flex flex-col md:flex-row border-t border-bg/15">
-    <h2 data-reveal="fade" class="m-0 bg-accent text-bg px-4 py-3 md:px-0 md:py-6 md:w-[clamp(56px,6vw,84px)] shrink-0 font-stretch-extra-condensed text-[clamp(18px,1.9vw,28px)] tracking-[0.1em] uppercase md:[writing-mode:vertical-rl] md:rotate-180 md:text-center">Trabajo seleccionado</h2>
-    <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-[clamp(20px,3vw,44px)] pt-6 md:p-[clamp(20px,3vw,44px)]">
+<section class="pb-[clamp(72px,9vw,140px)]">
+  <div class="mx-auto max-w-[1440px] px-[clamp(16px,4vw,56px)]">
+    <div class="grid grid-cols-1 gap-x-[clamp(12px,1.6vw,24px)] gap-y-12 md:grid-cols-12">
       {projects.map((p, i) => (
-        <article class="group flex flex-col gap-3">
-          <div data-reveal="left" style={`--rd:${i * 140}ms`} class="text-accent text-[clamp(14px,1.3vw,18px)] font-semibold tracking-[0.06em]">{p.num}/</div>
-          <div data-reveal="clip" style={`--rd:${i * 140 + 60}ms`} class="relative aspect-[16/10] bg-bg/5 overflow-hidden [&_img]:transition-[scale] [&_img]:duration-700 [&_img]:ease-snap group-hover:[&_img]:scale-[1.05]">
+        <article class:list={['group flex flex-col gap-4', p.layout]}>
+          <div data-reveal="clip" style={`--rd:${i * 140}ms`} class="relative aspect-[16/10] overflow-hidden border-[1.5px] border-text bg-white [&_img]:transition-[scale] [&_img]:duration-700 [&_img]:ease-snap group-hover:[&_img]:scale-[1.04]">
             <ImgSlot src={p.src} alt={p.alt} width={p.width} height={p.height} fit="cover" />
           </div>
-          <h3 data-reveal="up" style={`--rd:${i * 140 + 260}ms`} class="m-0 font-stretch-extra-condensed text-[clamp(16px,1.5vw,22px)] tracking-[0.04em] uppercase transition-colors duration-200 group-hover:text-accent">{p.name}</h3>
-          <p data-reveal="up" style={`--rd:${i * 140 + 340}ms`} class="m-0 -mt-2 text-[13px] tracking-[0.08em] uppercase text-bg/60">{p.category}</p>
+          <div data-reveal="up" style={`--rd:${i * 140 + 200}ms`} class="grid grid-cols-[auto_1fr] items-baseline gap-x-5 gap-y-1 border-t-[1.5px] border-text pt-3">
+            <span class="text-[13px] font-bold tracking-[0.1em] text-accent">{p.num}/</span>
+            <h3 class="m-0 font-stretch-expanded text-[clamp(18px,1.6vw,24px)] font-extrabold tracking-[-0.02em] uppercase transition-colors duration-200 group-hover:text-accent">{p.name}</h3>
+            <span></span>
+            <span class="text-[13px] tracking-[0.16em] uppercase font-semibold text-muted">{p.category}</span>
+          </div>
         </article>
       ))}
     </div>
+
+    <AllWork />
+
+    <a
+      href="#contacto"
+      data-reveal="up"
+      class="group relative isolate mt-[clamp(56px,7vw,110px)] flex items-center justify-between gap-6 overflow-hidden bg-accent px-[clamp(20px,3vw,48px)] py-[clamp(28px,4vw,64px)] text-text transition-[color,scale] duration-300 ease-snap before:absolute before:inset-0 before:-z-10 before:origin-bottom before:scale-y-0 before:bg-text before:transition-transform before:duration-[400ms] before:ease-snap hover:text-bg active:scale-[0.99]"
+    >
+      <span class="font-stretch-expanded text-[clamp(24px,4.6vw,76px)] leading-[0.95] font-black tracking-[-0.04em] uppercase">Construyamos<br />algo distinto</span>
+      <span aria-hidden="true" class="text-[clamp(40px,7vw,120px)] leading-none transition-transform duration-300 ease-snap group-hover:translate-x-2 group-hover:-translate-y-2">↗</span>
+    </a>
   </div>
 </section>
