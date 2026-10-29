@@ -1,14 +1,12 @@
 ---
-const projects = [
-  { name: 'CounterPoint', format: 'Institucional', year: '2026', href: '#estudio-de-caso' },
-  { name: 'Estudio jurídico Lasalle', format: 'Institucional', year: '2026' },
-  { name: 'Consultora Nexo', format: 'Institucional', year: '2025' },
-];
+import { projects as all } from '../../lib/projects';
+
+const projects = all;
 
 // The full list only earns its place once there is more to show than the featured cards above.
 const showAll = projects.length > 3;
 
-const formats = ['Todos', 'Landing page', 'Institucional', 'Rediseño'];
+const formats = ['Todos', 'Landing page', 'Institucional', 'Aplicación', 'Concepto', 'Rediseño'];
 ---
 
 {showAll && (
@@ -20,7 +18,8 @@ const formats = ['Todos', 'Landing page', 'Institucional', 'Rediseño'];
   <span class="text-[13px] tracking-[0.16em] uppercase font-bold text-muted">{projects.length} proyectos</span>
 </div>
 
-<section id="todos-los-trabajos" data-all-work aria-labelledby="all-work-title" class="mt-[clamp(40px,5vw,72px)]">
+<section id="todos-los-trabajos" data-all-work aria-labelledby="all-work-title">
+<div data-all-work-inner class="pt-[clamp(40px,5vw,72px)]">
   <div class="flex items-center justify-between gap-6 border-t-[1.5px] border-text pt-[clamp(20px,2.4vw,32px)]">
     <h2 id="all-work-title" class="m-0 font-stretch-expanded text-[clamp(26px,4.6vw,76px)] leading-none tracking-[-0.04em] uppercase"><span class="font-light">Todos </span><span class="font-black">los trabajos</span></h2>
     <div class="flex items-center gap-[clamp(12px,2vw,28px)]">
@@ -51,6 +50,8 @@ const formats = ['Todos', 'Landing page', 'Institucional', 'Rediseño'];
           <li data-row data-format={p.format} class="border-b border-text/40 last:border-b-[1.5px] last:border-text">
             <Tag
               href={p.href}
+              target={p.href?.startsWith('http') ? '_blank' : undefined}
+              rel={p.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
               class:list={[
                 'group grid grid-cols-[40px_1fr_auto] items-center gap-x-4 py-[clamp(16px,2vw,28px)] text-text md:grid-cols-[72px_1fr_220px_100px_40px]',
                 p.href && 'transition-[background-color,color] duration-200 ease-snap hover:bg-text hover:text-bg',
@@ -70,6 +71,7 @@ const formats = ['Todos', 'Landing page', 'Institucional', 'Rediseño'];
       })}
     </ol>
   </div>
+</div>
 </section>
   </>
 )}
@@ -89,12 +91,34 @@ const formats = ['Todos', 'Landing page', 'Institucional', 'Rediseño'];
     // With JS the panel starts closed; without it, it simply stays open.
     panel.dataset.ready = '';
 
+    // Collapsed with JS on: the panel grows via grid rows, so it is inert (unfocusable) until open.
+    panel.inert = true;
+
     const setOpen = (open: boolean) => {
-      if (open) panel.dataset.open = '';
-      else delete panel.dataset.open;
+      panel.inert = !open;
       opener.setAttribute('aria-expanded', String(open));
-      linkRow.hidden = open;
-      (open ? panel : opener).scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: open ? 'start' : 'center' });
+      const behavior = reduceMotion ? 'auto' : 'smooth';
+      if (open) {
+        panel.dataset.open = '';
+        linkRow.hidden = true;
+        panel.scrollIntoView({ behavior, block: 'start' });
+        return;
+      }
+      delete panel.dataset.open;
+      // Bring the link back only once the panel has folded away, so the layout doesn't jump mid-animation.
+      const finish = () => {
+        linkRow.hidden = false;
+        opener.scrollIntoView({ behavior, block: 'center' });
+      };
+      if (reduceMotion) finish();
+      else {
+        const onEnd = (e: TransitionEvent) => {
+          if (e.target !== panel || e.propertyName !== 'grid-template-rows') return;
+          panel.removeEventListener('transitionend', onEnd);
+          finish();
+        };
+        panel.addEventListener('transitionend', onEnd);
+      }
     };
 
     opener.addEventListener('click', (e) => {
@@ -119,9 +143,22 @@ const formats = ['Todos', 'Landing page', 'Institucional', 'Rediseño'];
 </script>
 
 <style is:global>
-  /* Closed by default once JS has taken over; opening lifts in like every other entrance. */
-  [data-all-work][data-ready]:not([data-open]) { display: none; }
+  /* Closed by default once JS has taken over. Rows animate 0fr -> 1fr so the panel unfolds to its real height. */
+  [data-all-work][data-ready] {
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden;
+  }
+  [data-all-work][data-ready] > [data-all-work-inner] { min-height: 0; overflow: hidden; }
+  [data-all-work][data-open] { grid-template-rows: 1fr; visibility: visible; }
   @media (prefers-reduced-motion: no-preference) {
-    [data-all-work][data-open] { animation: rv-up 420ms var(--ease-snap) backwards; }
+    [data-all-work][data-ready] {
+      opacity: 0;
+      transition: grid-template-rows 700ms var(--ease-drawer), opacity 400ms var(--ease-snap), visibility 0s linear 700ms;
+    }
+    [data-all-work][data-open] {
+      opacity: 1;
+      transition: grid-template-rows 700ms var(--ease-drawer), opacity 500ms var(--ease-snap) 120ms, visibility 0s;
+    }
   }
 </style>
