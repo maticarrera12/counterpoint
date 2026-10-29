@@ -4,41 +4,42 @@ import InstagramIcon from './icons/InstagramIcon.astro';
 import { whatsappUrl } from '../lib/whatsapp';
 ---
 
-<footer class="bg-text text-bg pt-[clamp(36px,6vw,80px)] px-[clamp(16px,4vw,56px)] pb-[clamp(20px,3vw,34px)]">
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-y-[clamp(20px,3vw,36px)] gap-x-[clamp(8px,1.6vw,22px)] border-b border-bg/30 pb-[clamp(24px,4vw,48px)]">
-    <div class="md:col-[1/4]">
-      <div class="text-[13px] tracking-[0.08em] uppercase font-semibold opacity-55 mb-2.5">Índice</div>
-      <div class="grid gap-1 text-[14px]">
-        <a href="/#manifiesto" class="link-u text-bg w-fit">Manifiesto</a>
-        <a href="/#servicios" class="link-u text-bg w-fit">Servicios</a>
-        <a href="/#trabajo" class="link-u text-bg w-fit">Trabajo seleccionado</a>
+<footer class="overflow-hidden bg-text text-bg">
+  <div class="mx-auto max-w-[1440px] px-[clamp(16px,4vw,56px)] pt-[clamp(48px,6vw,88px)] pb-7">
+    <div class="grid grid-cols-1 gap-8 border-b border-bg/25 pb-10 text-[16px] leading-[1.8] sm:grid-cols-2 lg:grid-cols-4">
+      <div>
+        <div class="mb-2.5 text-[13px] tracking-[0.16em] uppercase font-bold text-bg/60">Índice</div>
+        <a href="/#servicios" class="link-u block w-fit text-bg">Servicios</a>
+        <a href="/#manifiesto" class="link-u block w-fit text-bg">Manifiesto</a>
+        <a href="/#trabajo" class="link-u block w-fit text-bg">Trabajo seleccionado</a>
+        <a href="/#proceso" class="link-u block w-fit text-bg">Proceso</a>
+      </div>
+      <div>
+        <div class="mb-2.5 text-[13px] tracking-[0.16em] uppercase font-bold text-bg/60">Oficina</div>
+        Buenos Aires — San Isidro<br />Argentina
+      </div>
+      <div>
+        <div class="mb-2.5 text-[13px] tracking-[0.16em] uppercase font-bold text-bg/60">Contacto</div>
+        <a href="mailto:proyectos@estudiocounterpoint.com" class="link-u block w-fit text-accent [overflow-wrap:anywhere]">proyectos@estudiocounterpoint.com</a>
+        +54 11 5479 3056
+      </div>
+      <div>
+        <div class="mb-2.5 text-[13px] tracking-[0.16em] uppercase font-bold text-bg/60">Redes</div>
+        <a href="https://instagram.com/estudiocounterpoint" target="_blank" rel="noopener noreferrer" class="link-u block w-fit text-bg">@estudiocounterpoint</a>
       </div>
     </div>
-    <div class="md:col-[5/8]">
-      <div class="text-[13px] tracking-[0.08em] uppercase font-semibold opacity-55 mb-2.5">Oficina</div>
-      <div class="grid gap-1 text-[14px] opacity-85">
-        <span>Buenos Aires — San Isidro</span>
-      </div>
+    <div data-reveal="up" class="-ml-[0.04em] py-[clamp(28px,3vw,48px)] pb-[clamp(20px,2vw,32px)] font-heading font-black text-[min(10.2vw,142px)] leading-[0.8] tracking-[-0.05em] whitespace-nowrap">COUNTERPOINT<span class="text-accent">.</span></div>
+    <div class="flex flex-wrap items-center justify-between gap-4 text-[14px] text-bg/60">
+      <span>© 2026 Counterpoint. Un estudio a la altura de tu marca.</span>
+      <span><a href="/privacidad" class="text-bg/60 transition-colors duration-200 hover:text-accent">Privacidad</a> — Buenas prácticas de accesibilidad</span>
+      <span class="flex items-center gap-4">
+        <a href={whatsappUrl('Hola, quiero hacer una consulta.')} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="text-bg transition-[color,scale,translate] duration-200 ease-snap hover:text-accent hover:-translate-y-0.5 active:scale-90">
+          <WhatsAppIcon />
+        </a>
+        <a href="https://instagram.com/estudiocounterpoint" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-bg transition-[color,scale,translate] duration-200 ease-snap hover:text-accent hover:-translate-y-0.5 active:scale-90">
+          <InstagramIcon />
+        </a>
+      </span>
     </div>
-    <div class="col-span-full sm:col-span-2 md:col-[9/13] md:text-right">
-      <div class="text-[13px] tracking-[0.08em] uppercase font-semibold opacity-55 mb-2.5">Contacto</div>
-      <div class="grid gap-1 text-[14px]">
-        <a href="/#contacto" class="link-u text-accent w-fit md:ml-auto">proyectos@estudiocounterpoint.com</a>
-        <span class="opacity-85">+54 11 5479 3056</span>
-      </div>
-    </div>
-  </div>
-  <div data-reveal="up" class="font-heading font-extrabold text-[clamp(32px,11.5vw,190px)] leading-[0.82] tracking-[-0.06em] uppercase mt-[clamp(18px,3vw,40px)] mb-[clamp(12px,2vw,24px)] whitespace-nowrap max-w-full">CounterPoint<span class="text-accent">.</span></div>
-  <div class="flex flex-wrap justify-between gap-3 text-[14px] tracking-[0.02em] opacity-60">
-    <span>© 2026 CounterPoint. Un estudio a la altura de tu marca.</span>
-    <span><a href="/privacidad" class="text-bg hover:text-accent transition-colors duration-200">Privacidad</a> — Buenas prácticas de accesibilidad</span>
-    <span class="flex items-center gap-4">
-      <a href={whatsappUrl('Hola, quiero hacer una consulta.')} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="text-bg transition-[color,scale,translate] duration-200 ease-snap hover:text-accent hover:-translate-y-0.5 active:scale-90">
-        <WhatsAppIcon />
-      </a>
-      <a href="https://instagram.com/estudiocounterpoint" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-bg transition-[color,scale,translate] duration-200 ease-snap hover:text-accent hover:-translate-y-0.5 active:scale-90">
-        <InstagramIcon />
-      </a>
-    </span>
   </div>
 </footer>

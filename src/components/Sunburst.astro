@@ -1,0 +1,39 @@
+---
+// Wavy sunburst: ink rays that fan out from the centre and bend as they go (a gentle spiral).
+// Rays use currentColor, so the parent sets the ink colour and the background.
+interface Props {
+  width: number;
+  height: number;
+  rays?: number;
+  twist?: number;
+  class?: string;
+}
+
+const { width, height, rays = 24, twist = 0.5, class: className = '' } = Astro.props;
+
+const cx = width / 2;
+const cy = height / 2;
+const radius = Math.hypot(width, height) / 2 + 4;
+const steps = 28;
+const slice = (Math.PI * 2) / rays;
+
+const edge = (angle: number, reverse = false) => {
+  const pts = Array.from({ length: steps + 1 }, (_, k) => {
+    const t = k / steps;
+    const a = angle + twist * t * t;
+    return `${(cx + radius * t * Math.cos(a)).toFixed(1)},${(cy + radius * t * Math.sin(a)).toFixed(1)}`;
+  });
+  return reverse ? pts.reverse() : pts;
+};
+
+const paths = Array.from({ length: rays }, (_, i) => {
+  const a0 = i * slice;
+  return `M${edge(a0).join('L')}L${edge(a0 + slice / 2, true).join('L')}Z`;
+});
+---
+
+<svg viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid slice" aria-hidden="true" class:list={['block size-full', className]}>
+  <g class="sb-rays">
+    {paths.map((d) => <path d={d} fill="currentColor" />)}
+  </g>
+</svg>

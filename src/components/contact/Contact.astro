@@ -1,6 +1,8 @@
 ---
 import { PROJECT_TYPES } from '../../lib/contact-options';
 import { whatsappUrl } from '../../lib/whatsapp';
+import BrandMark from '../BrandMark.astro';
+import Sunburst from '../Sunburst.astro';
 
 const contactEmail = 'proyectos@estudiocounterpoint.com';
 const whatsappHref = whatsappUrl('Hola, quiero hacer una consulta.');
@@ -10,20 +12,15 @@ const fieldClass =
   'block w-full bg-transparent border-0 border-b-2 border-divider rounded-none px-0 py-3 text-[clamp(16px,1.4vw,20px)] leading-[1.4] text-text placeholder:text-muted transition-colors duration-200 ease-snap focus:border-accent aria-[invalid=true]:border-accent';
 const selectClass =
   'appearance-none pr-7 cursor-pointer [&>option]:text-text [&>option]:bg-bg';
-const errorClass = 'text-accent text-[14px] leading-[1.4] min-h-[1.4em] mt-1.5';
+const errorClass = 'text-accent text-[16px] leading-[1.4] min-h-[1.4em] mt-1.5';
 ---
 
-<section id="contacto" data-reveal-title class="border-t-2 border-divider pt-[clamp(48px,8vw,120px)] px-[clamp(16px,4vw,56px)] pb-[clamp(56px,9vw,130px)]">
-  <div data-reveal="fade" class="grid grid-cols-12 gap-x-[clamp(8px,1.6vw,22px)] mb-[clamp(28px,5vw,64px)]">
-    <div class="col-[1/2] text-[13px] tracking-[0.08em] uppercase font-semibold">05</div>
-    <div class="text-muted col-[2/5] text-[13px] tracking-[0.08em] uppercase font-semibold">Contacto</div>
+<section id="contacto" class="pb-[clamp(72px,9vw,140px)]">
+  <div class="mx-auto max-w-[1440px] px-[clamp(16px,4vw,56px)]">
+  <div data-reveal="fade" class="flex flex-wrap items-center justify-between gap-6 border-t-[1.5px] border-text py-[clamp(28px,3vw,40px)]">
+    <p class="m-0 max-w-[42ch] text-[clamp(18px,1.6vw,24px)] leading-[1.35]">Tu próximo cliente necesita comprender por qué elegirte. Diseñemos un sitio que comunique esa diferencia.</p>
+    <div class="flex gap-10 text-[13px] tracking-[0.16em] uppercase font-bold"><span>06</span><span class="text-muted">Contacto</span></div>
   </div>
-  <h2 class="m-0 text-[clamp(34px,6.6vw,108px)] leading-[0.88] tracking-[-0.04em] max-w-[14ch]">
-    Contanos qué querés <span class="text-accent italic font-normal">construir.</span>
-  </h2>
-  <p data-reveal="up" style="--rd:200ms" class="text-muted mt-3 mb-[clamp(28px,5vw,70px)] text-[clamp(15px,1.4vw,19px)] leading-[1.5] max-w-[52ch]">
-    Una conversación no compromete a nada. Respondemos dentro de las 48 hs hábiles.
-  </p>
 
   <div class="grid grid-cols-12 gap-y-[clamp(32px,5vw,56px)] gap-x-[clamp(8px,1.6vw,22px)]">
     <div hidden class="col-[1/13] md:col-[1/9]">
@@ -100,13 +97,13 @@ const errorClass = 'text-accent text-[14px] leading-[1.4] min-h-[1.4em] mt-1.5';
             type="submit"
             id="contact-submit"
             data-label="Enviar consulta →"
-            class="btn btn-primary text-[14px] tracking-[0.08em] uppercase px-[22px] py-[14px] disabled:opacity-60 disabled:cursor-not-allowed"
+            class="btn btn-primary text-[16px] tracking-[0.08em] uppercase px-[22px] py-[14px] disabled:opacity-60 disabled:cursor-not-allowed"
           >Enviar consulta →</button>
           <a
             href={whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-[14px] leading-[1.4] text-muted underline underline-offset-4 decoration-divider transition-colors duration-200 hover:text-text hover:decoration-accent"
+            class="text-[16px] leading-[1.4] text-muted underline underline-offset-4 decoration-divider transition-colors duration-200 hover:text-text hover:decoration-accent"
           >O escribinos por WhatsApp ↗</a>
         </div>
 
@@ -138,34 +135,41 @@ const errorClass = 'text-accent text-[14px] leading-[1.4] min-h-[1.4em] mt-1.5';
       </div>
     </div>
 
-    <aside class="col-[1/13] grid grid-cols-1 md:grid-cols-12 content-start gap-y-[clamp(24px,4vw,48px)] gap-x-[clamp(8px,1.6vw,22px)]">
-      <div data-reveal="up" class="md:col-[1/7]">
+    <aside class="col-[1/13] grid grid-cols-1 border-[1.5px] border-text bg-white lg:grid-cols-12">
+      <div class="flex flex-col gap-7 border-b-[1.5px] border-text p-[clamp(24px,3.4vw,52px)] lg:col-[1/8] lg:border-r-[1.5px]">
+        <h2 class="m-0 font-stretch-expanded leading-[0.95] tracking-[-0.03em] uppercase">
+          <span class="block text-[clamp(20px,2.6vw,40px)] font-black italic">A la altura de tu</span>
+          <span class="block text-[clamp(56px,8.6vw,140px)] font-light tracking-[-0.04em]">Marca</span>
+        </h2>
+        <p class="m-0 max-w-[40ch] text-[16px] leading-[1.5] text-muted">Contanos qué querés construir. Una conversación no compromete a nada — respondemos dentro de las 48 hs hábiles.</p>
         <a
           href={whatsappHref}
           target="_blank"
           rel="noopener noreferrer"
-          class="btn btn-primary inline-flex w-full md:w-auto items-center justify-between gap-6 text-[14px] tracking-[0.08em] uppercase px-[22px] py-[14px]"
+          class="btn btn-primary self-start justify-between gap-9 px-[22px] py-[18px] text-[13px] tracking-[0.16em] uppercase font-extrabold text-white"
         >Escribinos por WhatsApp <span aria-hidden="true">↗</span></a>
       </div>
-      <div data-reveal-stagger="110" class="md:col-[8/13] grid grid-cols-1 gap-y-[clamp(20px,3vw,36px)]">
-        <div data-reveal="up" class="border-t-2 border-accent pt-2.5">
-          <div class="text-[13px] tracking-[0.08em] uppercase font-semibold mb-2">Celular</div>
-          <a href="tel:+5491154793056" class="link-u text-[clamp(16px,1.5vw,22px)] leading-[1.3]">+54 11 5479 3056</a>
-        </div>
-        <div data-reveal="up" class="border-t-2 border-divider pt-2.5">
-          <div class="text-[13px] tracking-[0.08em] uppercase font-semibold mb-2">Instagram</div>
-          <a href="https://instagram.com/estudiocounterpoint" target="_blank" rel="noopener noreferrer" class="link-u text-[clamp(16px,1.5vw,22px)] leading-[1.3]">@estudiocounterpoint</a>
-        </div>
-        <div data-reveal="up" class="border-t-2 border-divider pt-2.5">
-          <div class="text-[13px] tracking-[0.08em] uppercase font-semibold mb-2">Mail directo</div>
-          <a href={`mailto:${contactEmail}`} class="link-u text-[clamp(16px,1.5vw,22px)] leading-[1.3] break-words">{contactEmail}</a>
-        </div>
-        <div data-reveal="up" class="border-t-2 border-divider pt-2.5">
-          <div class="text-[13px] tracking-[0.08em] uppercase font-semibold mb-2">Oficina</div>
-          <p class="text-muted m-0 text-[clamp(14px,1.2vw,17px)] leading-[1.5]">Buenos Aires — San Isidro</p>
-        </div>
+      <div data-reveal="scale" class="hidden items-center justify-center overflow-hidden p-6 lg:col-[8/13] lg:row-[1/3] lg:flex">
+        <BrandMark mark="dark" class="h-[clamp(200px,26vw,380px)]" />
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:col-[1/8] lg:border-r-[1.5px] lg:border-text">
+        {[
+          { k: 'Celular', v: '+54 11 5479 3056', href: 'tel:+5491154793056' },
+          { k: 'Instagram', v: '@estudiocounterpoint', href: 'https://instagram.com/estudiocounterpoint' },
+          { k: 'Mail directo', v: contactEmail, href: `mailto:${contactEmail}` },
+          { k: 'Oficina', v: 'Buenos Aires — San Isidro', href: '#contacto' },
+        ].map((c) => (
+          <a href={c.href} class="flex flex-col gap-2 border-b border-text px-[clamp(20px,2.4vw,36px)] py-[22px] text-text transition-colors duration-200 hover:bg-bg hover:text-text">
+            <span class="text-[13px] tracking-[0.16em] uppercase font-bold text-muted">{c.k}</span>
+            <span class="text-[clamp(16px,1.3vw,19px)] [overflow-wrap:anywhere]">{c.v}</span>
+          </a>
+        ))}
+      </div>
+      <div data-reveal="clip" class="sb-scope col-span-full h-[clamp(120px,19vw,270px)] overflow-hidden bg-white text-text" aria-hidden="true">
+        <Sunburst width={1440} height={270} rays={28} twist={0.18} />
       </div>
     </aside>
+  </div>
   </div>
 </section>
 

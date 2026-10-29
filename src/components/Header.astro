@@ -1,13 +1,27 @@
+---
+import BrandMark from './BrandMark.astro';
+
+const linkClass =
+  'relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:origin-right after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-snap hover:after:origin-left hover:after:scale-x-100';
+---
+
 <div id="site-chrome" class="sticky top-0 z-40">
   <div class="scroll-progress" aria-hidden="true"></div>
-  <header id="site-header" class="bg-bg border-b-2 border-divider grid grid-cols-[1fr_auto] items-end gap-4 pt-[10px] px-[clamp(16px,4vw,56px)] pb-2 transition-transform duration-[240ms] ease-snap will-change-transform">
-    <a href="/#top" class="group font-heading font-extrabold text-[clamp(15px,1.6vw,21px)] tracking-[-0.03em] uppercase leading-none">CounterPoint<span class="inline-block text-accent transition-transform duration-300 ease-spring group-hover:-translate-y-[0.18em]">.</span></a>
-    <nav class=" hidden md:flex flex-wrap gap-[clamp(10px,2vw,28px)] text-[13px] tracking-[0.08em] uppercase font-semibold">
-      <a href="/#manifiesto" class="relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:origin-right after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-snap hover:after:origin-left hover:after:scale-x-100">Manifiesto</a>
-      <a href="/#servicios" class="relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:origin-right after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-snap hover:after:origin-left hover:after:scale-x-100">Servicios</a>
-      <a href="/#trabajo" class="relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:origin-right after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-snap hover:after:origin-left hover:after:scale-x-100">Trabajo</a>
-      <a href="/#contacto" class="text-accent relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:origin-right after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-snap hover:after:origin-left hover:after:scale-x-100">Consultar</a>
-    </nav>
+  <header id="site-header" class="bg-text text-bg transition-transform duration-[240ms] ease-snap will-change-transform">
+    <div class="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-6 px-[clamp(16px,4vw,56px)]">
+      <a href="/#top" class="flex items-center gap-2.5 text-bg hover:text-bg">
+        <BrandMark mark="light" class="h-8" />
+        <span class="font-stretch-expanded text-[13px] font-extrabold tracking-[0.02em] uppercase">Counterpoint</span>
+      </a>
+      <nav class="hidden md:flex items-center justify-end gap-[clamp(12px,2vw,36px)] whitespace-nowrap text-[13px] tracking-[0.16em] uppercase font-semibold">
+        <a href="/#servicios" class:list={[linkClass, 'text-bg hover:text-bg']}>Servicios</a>
+        <a href="/#manifiesto" class:list={[linkClass, 'text-bg hover:text-bg']}>Manifiesto</a>
+        <a href="/#trabajo" class:list={[linkClass, 'text-bg hover:text-bg']}>Trabajo</a>
+        <a href="/#proceso" class:list={[linkClass, 'hidden lg:inline text-bg hover:text-bg']}>Proceso</a>
+        <span class="hidden lg:inline tabular-nums text-bg/60">BUE <span id="bue-clock">--:--</span></span>
+        <a href="/#contacto" class:list={[linkClass, 'text-accent']}>Consultar →</a>
+      </nav>
+    </div>
   </header>
 </div>
 
@@ -35,5 +49,20 @@
       },
       { passive: true }
     );
+  }
+
+  const clock = document.getElementById('bue-clock');
+  if (clock) {
+    const format = new Intl.DateTimeFormat('es-AR', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+      timeZone: 'America/Argentina/Buenos_Aires',
+    });
+    const tick = () => {
+      clock.textContent = format.format(new Date());
+    };
+    tick();
+    window.setInterval(tick, 15000);
   }
 </script>
