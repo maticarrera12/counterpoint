@@ -6,7 +6,11 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://estudiocounterpoint.com',
-  adapter: vercel(),
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true
+    }
+  }),
   integrations: [mdx(), sitemap()],
   vite: {
     plugins: [tailwindcss()],

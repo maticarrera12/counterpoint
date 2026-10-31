@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import WhatsAppWidget from '../components/WhatsAppWidget.astro';
 import Seo from '../components/Seo.astro';
+import Analytics from '@vercel/analytics/astro';
 
 interface Props {
   title: string;
@@ -39,6 +40,7 @@ const { title, description, image, noindex } = Astro.props;
   <body>
     <slot />
     <WhatsAppWidget />
+    <Analytics />
     <script>
       import '../scripts/reveal-titles';
       import '../scripts/grow-sections';
