@@ -5,3 +5,7 @@ dist
 .astro
 .DS_Store
 .taste-skill/
+
+# Local tooling and marketing content, not part of the site
+.atl/
+reels/
