@@ -7,7 +7,9 @@ const repeats = 6;
 const sequence = Array.from({ length: repeats }, () => phrases).flat();
 ---
 
-<section id="top" class="relative pt-[clamp(24px,5vw,64px)] px-[clamp(16px,4vw,56px)] pb-0">
+<section id="top" class="relative pt-[clamp(24px,5vw,64px)] pb-0">
+  <!-- Same 1440 container as the header and other sections; only the ticker runs wider. -->
+  <div class="mx-auto max-w-[1440px] px-[clamp(16px,4vw,56px)]">
   <div>
     <div data-hero="1" class="flex flex-col md:flex-row md:justify-between gap-x-[clamp(8px,1.6vw,22px)] gap-y-0">
       <div class="text-[13px] tracking-[0.08em] uppercase font-semibold ">Vol. 01<br><span class="text-muted hidden md:block">Diseño & Código&nbsp;/ sept. 2026</span></div>
@@ -41,7 +43,9 @@ const sequence = Array.from({ length: repeats }, () => phrases).flat();
     </div>
   </div>
 
-  <div data-hero="5" class="ticker">
+  </div>
+
+  <div data-hero="5" class="ticker mx-[clamp(16px,4vw,56px)]">
     <div class="ticker-track">
       {[0, 1].map((copy) => (
         <div class="ticker-copy" aria-hidden={copy === 1}>
