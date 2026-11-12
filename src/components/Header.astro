@@ -18,7 +18,6 @@ const linkClass =
         <a href="/#manifiesto" class:list={[linkClass, 'text-bg hover:text-bg']}>Manifiesto</a>
         <a href="/#trabajo" class:list={[linkClass, 'text-bg hover:text-bg']}>Trabajo</a>
         <a href="/#proceso" class:list={[linkClass, 'hidden lg:inline text-bg hover:text-bg']}>Proceso</a>
-        <span class="hidden lg:inline tabular-nums text-bg/60">BUE <span id="bue-clock">--:--</span></span>
         <a href="/#contacto" class:list={[linkClass, 'text-accent']}>Consultar →</a>
       </nav>
     </div>
@@ -49,20 +48,5 @@ const linkClass =
       },
       { passive: true }
     );
-  }
-
-  const clock = document.getElementById('bue-clock');
-  if (clock) {
-    const format = new Intl.DateTimeFormat('es-AR', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-      timeZone: 'America/Argentina/Buenos_Aires',
-    });
-    const tick = () => {
-      clock.textContent = format.format(new Date());
-    };
-    tick();
-    window.setInterval(tick, 15000);
   }
 </script>
