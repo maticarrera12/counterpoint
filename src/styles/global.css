@@ -74,6 +74,24 @@
     overflow: hidden;
     background: var(--color-accent);
     color: var(--color-bg);
+    /* Offset shadow: lifts on hover, presses flat into it on click. Light comes from the
+       top-left, so those edges get a faint inset highlight. Every state keeps the same
+       two-layer shadow list so box-shadow interpolates. */
+    --btn-off: 4px;
+    --btn-shadow: color-mix(in srgb, var(--color-text) 18%, transparent);
+    --btn-highlight: inset 1px 1px 0 rgb(255 255 255 / 0.25);
+    box-shadow: var(--btn-highlight), var(--btn-off) var(--btn-off) 12px -2px var(--btn-shadow);
+    transition: transform 200ms var(--ease-snap), box-shadow 200ms var(--ease-snap), color 200ms ease;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover:not(:disabled) {
+      transform: translate(-2px, -2px);
+      box-shadow: var(--btn-highlight), calc(var(--btn-off) + 2px) calc(var(--btn-off) + 2px) 16px -2px color-mix(in srgb, var(--color-accent) 35%, transparent);
+    }
+  }
+  .btn-primary:active:not(:disabled) {
+    transform: translate(var(--btn-off), var(--btn-off));
+    box-shadow: inset 1px 1px 0 rgb(255 255 255 / 0), 0 0 0 -2px var(--btn-shadow);
   }
   .btn-primary::before {
     content: '';
