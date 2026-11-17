@@ -1,0 +1,46 @@
+---
+// Concrete, checkable promises instead of vanity metrics.
+const commitments = [
+  {
+    word: 'Directo',
+    title: 'Sin intermediarios',
+    text: 'Hablás con quienes diseñan y programan tu sitio. Sin account managers ni teléfono descompuesto.',
+  },
+  {
+    word: 'A medida',
+    title: 'Sin plantillas',
+    text: 'Diseñamos desde cero para tu marca. Nada de temas comprados ni estructuras recicladas.',
+  },
+  {
+    word: 'Tuyo',
+    title: 'Sin ataduras',
+    text: 'Dominio, código y accesos quedan a tu nombre. Si un día decidís seguir con otro equipo, te llevás todo.',
+  },
+  {
+    word: 'Presentes',
+    title: 'Después del lanzamiento',
+    text: 'Publicar no es despedirse. Seguimos cerca para ajustes, dudas y mejoras cuando las necesites.',
+  },
+];
+---
+
+<section data-reveal-title class="bg-accent text-text">
+  <div class="mx-auto max-w-[1440px] px-[clamp(16px,4vw,56px)] py-[clamp(64px,8vw,120px)]">
+    <div class="grid grid-cols-1 items-end gap-6 border-b-[1.5px] border-text pb-[clamp(40px,5vw,72px)] md:grid-cols-3">
+      <div data-reveal="fade" class="flex gap-10 text-[13px] tracking-[0.16em] uppercase font-bold"><span>04</span><span>Compromisos</span></div>
+      <h2 class="m-0 font-stretch-expanded text-[clamp(28px,3.6vw,56px)] leading-none tracking-[-0.04em] uppercase md:col-span-2"><span class="font-light">Sin métricas infladas. </span><span class="font-black text-white">Compromisos que podés exigirnos.</span></h2>
+    </div>
+    <div class="grid grid-cols-1 gap-[1.5px] bg-text md:grid-cols-2 xl:grid-cols-4">
+      {commitments.map((c, i) => (
+        <div data-imp-row class="@container flex min-w-0 flex-col gap-[18px] bg-accent py-[clamp(28px,3vw,44px)] md:px-[clamp(16px,2vw,32px)]">
+          {/* Font scales with the column so the longest word ("Presentes") never hits the mask edge. */}
+          <div class="imp-mask font-stretch-expanded font-black text-[clamp(24px,12.5cqi,60px)] leading-[0.9] tracking-[-0.05em] uppercase">
+            <span data-imp="rise" style={`--d:${i * 120}ms`} class="inline-block">{c.word}</span>
+          </div>
+          <h3 class="m-0 text-[13px] tracking-[0.16em] uppercase font-bold text-white">{c.title}</h3>
+          <p data-imp="from-left" style={`--d:${300 + i * 120}ms`} class="m-0 max-w-[34ch] text-[15px] leading-[1.5] text-pretty">{c.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
